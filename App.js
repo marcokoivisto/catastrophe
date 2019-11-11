@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-import { Dimensions, StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, View, StatusBar } from "react-native";
 
 import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
 
 import Physics from "./Physics";
-import Cat from "./Cat";
-
-const Constants = {
-  MAX_WIDTH: Dimensions.get("screen").width,
-  MAX_HEIGHT: Dimensions.get("screen").height,
-  GAP_SIZE: 200, // gap between the two parts of the pipe
-  PIPE_WIDTH: 100 // width of the pipe
-};
+import Cat from "./components/Cat";
+import Wall from "./components/Wall";
+import Constants from "./Constants";
 
 export default class App extends Component {
   constructor(props) {
@@ -32,17 +27,61 @@ export default class App extends Component {
     let world = engine.world;
 
     let cat = Matter.Bodies.rectangle(
-      Constants.MAX_WIDTH / 4,
-      Constants.MAX_HEIGHT / 2,
+      Constants.SCREEN_WIDTH / 2,
+      Constants.SCREEN_HEIGHT / 3,
       50,
       50
     );
 
-    Matter.World.add(world, [cat]);
+    let leftWall = Matter.Bodies.rectangle(
+      Constants.WALL_WIDTH / 2,
+      Constants.SCREEN_HEIGHT / 2,
+      Constants.WALL_WIDTH,
+      Constants.SCREEN_HEIGHT,
+      {
+        isStatic: true
+      }
+    );
+
+    let rightWall = Matter.Bodies.rectangle(
+      Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
+      Constants.SCREEN_HEIGHT / 2,
+      Constants.WALL_WIDTH,
+      Constants.SCREEN_HEIGHT,
+      {
+        isStatic: true
+      }
+    );
+
+    let floor = Matter.Bodies.rectangle(
+      Constants.SCREEN_WIDTH / 2,
+      Constants.SCREEN_HEIGHT - Constants.WALL_WIDTH / 2,
+      Constants.SCREEN_WIDTH,
+      Constants.WALL_WIDTH,
+      {
+        isStatic: true
+      }
+    );
+
+    let ceiling = Matter.Bodies.rectangle(
+      Constants.SCREEN_WIDTH / 2,
+      0 - Constants.WALL_WIDTH / 2,
+      Constants.SCREEN_WIDTH,
+      Constants.WALL_WIDTH,
+      {
+        isStatic: true
+      }
+    );
+
+    Matter.World.add(world, [cat, leftWall, rightWall, floor, ceiling]);
 
     return {
-      physics: { engine: engine, world: world },
-      cat: { body: cat, size: [80, 80], color: "red", renderer: Cat }
+      physics: { engine, world },
+      leftWall: { body: leftWall, renderer: Wall },
+      rightWall: { body: rightWall, renderer: Wall },
+      floor: { body: floor, renderer: Wall },
+      ceiling: { body: ceiling, renderer: Wall },
+      cat: { body: cat, size: [70, 70], renderer: Cat }
     };
   };
 

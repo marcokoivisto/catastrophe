@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 
 export default class Cat extends Component {
   render() {
@@ -16,7 +16,7 @@ export default class Cat extends Component {
           top: y,
           width: width,
           height: height,
-          fontSize: 68
+          fontSize: width - 6
         }}
       >
         🐈
