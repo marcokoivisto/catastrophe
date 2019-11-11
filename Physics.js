@@ -10,9 +10,9 @@ const Physics = (entities, { touches, time }) => {
     .forEach(t => {
       const { pageX } = t.event;
       if (pageX < Constants.SCREEN_WIDTH / 2) {
-        Matter.Body.applyForce(cat, cat.position, { x: -0.06, y: -0.04 });
+        Matter.Body.applyForce(cat, cat.position, { x: -0.06, y: 0 });
       } else {
-        Matter.Body.applyForce(cat, cat.position, { x: 0.06, y: -0.04 });
+        Matter.Body.applyForce(cat, cat.position, { x: 0.06, y: 0 });
       }
     });
 

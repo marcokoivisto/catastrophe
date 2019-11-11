@@ -4,7 +4,12 @@ import { StyleSheet, View, StatusBar } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
 
+import CameraRenderer from "./CameraRenderer";
+
+// Systems
 import Physics from "./Physics";
+import Camera from "./Camera";
+
 import Cat from "./components/Cat";
 import Wall from "./components/Wall";
 import Constants from "./Constants";
@@ -37,7 +42,7 @@ export default class App extends Component {
       Constants.WALL_WIDTH / 2,
       Constants.SCREEN_HEIGHT / 2,
       Constants.WALL_WIDTH,
-      Constants.SCREEN_HEIGHT,
+      Constants.SCREEN_HEIGHT * 3,
       {
         isStatic: true
       }
@@ -47,7 +52,7 @@ export default class App extends Component {
       Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
       Constants.SCREEN_HEIGHT / 2,
       Constants.WALL_WIDTH,
-      Constants.SCREEN_HEIGHT,
+      Constants.SCREEN_HEIGHT * 3,
       {
         isStatic: true
       }
@@ -55,7 +60,7 @@ export default class App extends Component {
 
     let floor = Matter.Bodies.rectangle(
       Constants.SCREEN_WIDTH / 2,
-      Constants.SCREEN_HEIGHT - Constants.WALL_WIDTH / 2,
+      Constants.SCREEN_HEIGHT * 2 - Constants.WALL_WIDTH / 2,
       Constants.SCREEN_WIDTH,
       Constants.WALL_WIDTH,
       {
@@ -80,8 +85,9 @@ export default class App extends Component {
       leftWall: { body: leftWall, renderer: Wall },
       rightWall: { body: rightWall, renderer: Wall },
       floor: { body: floor, renderer: Wall },
-      ceiling: { body: ceiling, renderer: Wall },
-      cat: { body: cat, size: [70, 70], renderer: Cat }
+      // ceiling: { body: ceiling, renderer: Wall },
+      cat: { body: cat, size: [70, 70], renderer: Cat },
+      camera: { offsetY: 0 }
     };
   };
 
@@ -92,9 +98,10 @@ export default class App extends Component {
           ref={ref => {
             this.gameEngine = ref;
           }}
+          renderer={CameraRenderer}
           style={styles.gameContainer}
           running={this.state.running}
-          systems={[Physics]}
+          systems={[Camera, Physics]}
           entities={this.entities}
         >
           <StatusBar hidden={true} />
