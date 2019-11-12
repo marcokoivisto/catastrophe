@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, StatusBar, Image } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
@@ -13,6 +14,7 @@ import Camera from "./Camera";
 import Cat from "./components/Cat";
 import Wall from "./components/Wall";
 import Constants from "./Constants";
+import Clouds from "./components/Clouds";
 
 export default class App extends Component {
   constructor(props) {
@@ -78,6 +80,10 @@ export default class App extends Component {
       }
     );
 
+    let clouds = Matter.Bodies.rectangle(0, 0, 0, 0, {
+      isStatic: true
+    });
+
     Matter.World.add(world, [cat, leftWall, rightWall, floor, ceiling]);
 
     return {
@@ -85,7 +91,7 @@ export default class App extends Component {
       leftWall: { body: leftWall, renderer: Wall },
       rightWall: { body: rightWall, renderer: Wall },
       floor: { body: floor, renderer: Wall },
-      // ceiling: { body: ceiling, renderer: Wall },
+      clouds: { body: clouds, renderer: Clouds },
       cat: { body: cat, size: [70, 70], renderer: Cat },
       camera: { offsetY: 0 }
     };
@@ -93,7 +99,17 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <LinearGradient
+        style={styles.container}
+        colors={[
+          "#BCC3DB",
+          "#BCC3DB",
+          "#BCC3DB",
+          "#D6B7C5",
+          "#D6B7C5",
+          "#D6B7C5"
+        ]}
+      >
         <GameEngine
           ref={ref => {
             this.gameEngine = ref;
@@ -106,7 +122,7 @@ export default class App extends Component {
         >
           <StatusBar hidden={true} />
         </GameEngine>
-      </View>
+      </LinearGradient>
     );
   }
 }
@@ -114,7 +130,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000"
+    backgroundColor: "#fff"
   },
   gameContainer: {
     position: "absolute",

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
+import Constants from "../Constants";
 
 export default class Wall extends Component {
   render() {
@@ -9,7 +10,8 @@ export default class Wall extends Component {
     const y = this.props.body.position.y - height / 2;
 
     return (
-      <View
+      <Image
+        resizeMode="repeat"
         style={{
           position: "absolute",
           left: x,
@@ -17,9 +19,9 @@ export default class Wall extends Component {
           width: width,
           height: height,
           overflow: "hidden",
-          flexDirection: "row",
-          backgroundColor: "#000"
+          flexDirection: "row"
         }}
+        source={require("../assets/brick.png")}
       />
     );
   }
