@@ -34,8 +34,8 @@ export default class App extends Component {
     let cat = Matter.Bodies.rectangle(
       Constants.SCREEN_WIDTH / 2,
       Constants.SCREEN_HEIGHT / 3,
-      50,
-      50
+      70,
+      70
     );
 
     let leftWall = Matter.Bodies.rectangle(
@@ -114,7 +114,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#000"
   },
   gameContainer: {
     position: "absolute",

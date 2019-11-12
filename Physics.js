@@ -6,13 +6,13 @@ const Physics = (entities, { touches, time }) => {
   let cat = entities.cat.body;
 
   touches
-    .filter(t => t.type === "press")
+    .filter(t => t.type === "move")
     .forEach(t => {
       const { pageX } = t.event;
       if (pageX < Constants.SCREEN_WIDTH / 2) {
-        Matter.Body.applyForce(cat, cat.position, { x: -0.06, y: 0 });
+        Matter.Body.applyForce(cat, cat.position, { x: -0.01, y: 0 });
       } else {
-        Matter.Body.applyForce(cat, cat.position, { x: 0.06, y: 0 });
+        Matter.Body.applyForce(cat, cat.position, { x: 0.01, y: 0 });
       }
     });
 
