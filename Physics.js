@@ -5,14 +5,15 @@ const Physics = (entities, { touches, time }) => {
   let engine = entities.physics.engine;
   let cat = entities.cat.body;
 
+  console.log(touches);
   touches
-    .filter(t => t.type === "move")
+    .filter(t => t.type === "press")
     .forEach(t => {
       const { pageX } = t.event;
       if (pageX < Constants.SCREEN_WIDTH / 2) {
-        Matter.Body.applyForce(cat, cat.position, { x: -0.01, y: 0 });
+        Matter.Body.applyForce(cat, cat.position, { x: -0.03, y: 0 });
       } else {
-        Matter.Body.applyForce(cat, cat.position, { x: 0.01, y: 0 });
+        Matter.Body.applyForce(cat, cat.position, { x: 0.03, y: 0 });
       }
     });
 

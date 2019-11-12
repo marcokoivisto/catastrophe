@@ -8,6 +8,7 @@ import {
   Text
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
 import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
@@ -139,8 +140,11 @@ export default class App extends Component {
             onPress={this.reset}
           >
             <View style={styles.fullScreen}>
+              <Icon name="skull-crossbones" size={68} color="#fff" solid />
               <Text style={styles.gameOverText}>Game Over</Text>
-              <Text style={styles.gameOverSubText}>Try Again</Text>
+              <Text style={styles.gameOverSubText}>
+                Press anywhere to try again
+              </Text>
             </View>
           </TouchableOpacity>
         )}
@@ -162,12 +166,15 @@ const styles = StyleSheet.create({
     right: 0
   },
   gameOverText: {
+    marginTop: 20,
     color: "white",
-    fontSize: 48
+    fontSize: 48,
+    fontWeight: "bold"
   },
   gameOverSubText: {
     color: "white",
-    fontSize: 24
+    fontSize: 20,
+    marginTop: 15
   },
   fullScreen: {
     position: "absolute",
@@ -175,8 +182,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "black",
-    opacity: 0.8,
+    backgroundColor: "rgba(0,0,0,0.8)",
     justifyContent: "center",
     alignItems: "center"
   },
