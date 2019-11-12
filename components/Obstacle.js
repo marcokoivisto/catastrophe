@@ -38,15 +38,15 @@ export default (world, position, angle, width, side) => {
     position.x = Constants.SCREEN_WIDTH - position.x;
   }
 
-  let height = 20;
-  let body = Matter.Bodies.rectangle(position.x, position.y, width, height, {
+  const height = 20;
+  const body = Matter.Bodies.rectangle(position.x, position.y, width, height, {
     isStatic: true,
     angle: angle,
     friction: 0,
     restitution: 0.5
   });
 
-  let vertices = [
+  const vertices = [
     { x: position.x - width / 2, y: position.y - height / 2 },
     { x: position.x + width / 2, y: position.y - height / 2 },
     { x: position.x - width / 2, y: position.y + height / 2 },
@@ -58,7 +58,6 @@ export default (world, position, angle, width, side) => {
   Matter.World.add(world, [body]);
 
   return {
-    platform: { vertices },
     body,
     size: { width, height },
     renderer: <ObstacleRenderer />

@@ -6,12 +6,13 @@ import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
 
 import CameraRenderer from "./CameraRenderer";
-import Obstacle from "./components/Obstacle";
 
 // Systems
 import Physics from "./Physics";
 import Camera from "./Camera";
 
+// Components
+import Obstacle from "./components/Obstacle";
 import Cat from "./components/Cat";
 import Wall from "./components/Wall";
 import Constants from "./Constants";
@@ -31,58 +32,12 @@ export default class App extends Component {
   }
 
   setupWorld = () => {
-    let engine = Matter.Engine.create({ enableSleeping: false });
-    let world = engine.world;
+    const engine = Matter.Engine.create({ enableSleeping: false });
+    const world = engine.world;
 
-    let cat = Matter.Bodies.rectangle(Constants.SCREEN_WIDTH / 2, 0, 70, 70, {
-      restitution: 0.5
-    });
-
-    let leftWall = Matter.Bodies.rectangle(
-      Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_HEIGHT / 2,
-      Constants.WALL_WIDTH,
-      Constants.SCREEN_HEIGHT * 3,
-      {
-        isStatic: true
-      }
-    );
-
-    let rightWall = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_HEIGHT / 2,
-      Constants.WALL_WIDTH,
-      Constants.SCREEN_HEIGHT * 3,
-      {
-        isStatic: true
-      }
-    );
-
-    let floor = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH / 2,
-      Constants.SCREEN_HEIGHT * 2 - Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_WIDTH,
-      Constants.WALL_WIDTH * 4,
-      {
-        isStatic: true
-      }
-    );
-
-    let ceiling = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH / 2,
-      0 - Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_WIDTH,
-      Constants.WALL_WIDTH,
-      {
-        isStatic: true
-      }
-    );
-
-    let clouds = Matter.Bodies.rectangle(0, 0, 0, 0, {
+    const clouds = Matter.Bodies.rectangle(0, 0, 0, 0, {
       isStatic: true
     });
-
-    Matter.World.add(world, [cat, leftWall, rightWall, floor, ceiling]);
 
     return {
       physics: { engine, world },
@@ -91,11 +46,33 @@ export default class App extends Component {
       obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 400, "left"),
       obstacle4: Obstacle(world, { x: 0, y: 1000 }, 0.4, 400, "right"),
       obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 400, "left"),
-      leftWall: { body: leftWall, renderer: Wall },
-      rightWall: { body: rightWall, renderer: Wall },
-      floor: { body: floor, renderer: Wall },
+      leftWall: Wall(
+        world,
+        { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },
+        { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 3 }
+      ),
+      rightWall: Wall(
+        world,
+        {
+          x: Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
+          y: Constants.SCREEN_HEIGHT / 2
+        },
+        { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 3 }
+      ),
+      floor: Wall(
+        world,
+        {
+          x: Constants.SCREEN_WIDTH / 2,
+          y: Constants.SCREEN_HEIGHT * 2 - Constants.WALL_WIDTH / 2
+        },
+        { width: Constants.SCREEN_WIDTH, height: Constants.WALL_WIDTH * 4 }
+      ),
       clouds: { body: clouds, renderer: Clouds },
-      cat: { body: cat, size: [70, 70], renderer: Cat },
+      cat: Cat(
+        world,
+        { x: Constants.SCREEN_WIDTH / 2, y: 0 },
+        { width: 70, height: 70 }
+      ),
       camera: { offsetY: 0 }
     };
   };
