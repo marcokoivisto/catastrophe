@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { View, Image } from "react-native";
+import Matter from "matter-js";
 import Constants from "../Constants";
 
-export default class Clouds extends Component {
+export class CloudsRenderer extends Component {
   render() {
+    const { numberOfCloudSets } = this.props;
     return (
       <View
         style={{
@@ -11,23 +13,32 @@ export default class Clouds extends Component {
           paddingRight: Constants.WALL_WIDTH
         }}
       >
-        <Image
-          resizeMode="contain"
-          style={{
-            width: Constants.SCREEN_WIDTH - Constants.WALL_WIDTH * 2,
-            height: 400
-          }}
-          source={require("../assets/clouds.png")}
-        />
-        <Image
-          resizeMode="contain"
-          style={{
-            width: Constants.SCREEN_WIDTH - Constants.WALL_WIDTH * 2,
-            height: 400
-          }}
-          source={require("../assets/clouds.png")}
-        />
+        {Array.from(Array(numberOfCloudSets).keys()).map(key => (
+          <Image
+            key={key}
+            resizeMode="contain"
+            style={{
+              width: Constants.SCREEN_WIDTH - Constants.WALL_WIDTH * 2,
+              height: 400
+            }}
+            source={require("../assets/clouds.png")}
+          />
+        ))}
       </View>
     );
   }
 }
+
+export default (world, numberOfCloudSets) => {
+  let body = Matter.Bodies.rectangle(0, 0, 0, 0, {
+    isStatic: true
+  });
+
+  Matter.World.add(world, [body]);
+
+  return {
+    body,
+    renderer: <CloudsRenderer />,
+    numberOfCloudSets
+  };
+};

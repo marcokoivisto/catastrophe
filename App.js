@@ -78,23 +78,19 @@ export default class App extends Component {
       }
     );
 
-    let clouds = Matter.Bodies.rectangle(0, 0, 0, 0, {
-      isStatic: true
-    });
-
     Matter.World.add(world, [cat, leftWall, rightWall, floor, ceiling]);
 
     return {
       physics: { engine, world },
-      obstacle1: Obstacle(world, { x: 0, y: 100 }, 0.4, 400, "left"),
-      obstacle2: Obstacle(world, { x: 0, y: 400 }, 0.4, 400, "right"),
-      obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 400, "left"),
-      obstacle4: Obstacle(world, { x: 0, y: 1000 }, 0.4, 400, "right"),
-      obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 400, "left"),
+      obstacle1: Obstacle(world, { x: 0, y: 100 }, 0.4, 300, "left"),
+      obstacle2: Obstacle(world, { x: 0, y: 400 }, 0.4, 200, "right"),
+      obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 150, "left"),
+      obstacle4: Obstacle(world, { x: 0, y: 1000 }, 0.4, 300, "right"),
+      obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 200, "left"),
       leftWall: { body: leftWall, renderer: Wall },
       rightWall: { body: rightWall, renderer: Wall },
       floor: { body: floor, renderer: Wall },
-      clouds: { body: clouds, renderer: Clouds },
+      clouds: Clouds(world, 2),
       cat: { body: cat, size: [70, 70], renderer: Cat },
       camera: { offsetY: 0 }
     };
