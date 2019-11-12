@@ -6,6 +6,7 @@ import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
 
 import CameraRenderer from "./CameraRenderer";
+import Obstacle from "./components/Obstacle";
 
 // Systems
 import Physics from "./Physics";
@@ -33,12 +34,9 @@ export default class App extends Component {
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
 
-    let cat = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH / 2,
-      Constants.SCREEN_HEIGHT / 3,
-      70,
-      70
-    );
+    let cat = Matter.Bodies.rectangle(Constants.SCREEN_WIDTH / 2, 0, 70, 70, {
+      restitution: 0.5
+    });
 
     let leftWall = Matter.Bodies.rectangle(
       Constants.WALL_WIDTH / 2,
@@ -64,7 +62,7 @@ export default class App extends Component {
       Constants.SCREEN_WIDTH / 2,
       Constants.SCREEN_HEIGHT * 2 - Constants.WALL_WIDTH / 2,
       Constants.SCREEN_WIDTH,
-      Constants.WALL_WIDTH,
+      Constants.WALL_WIDTH * 4,
       {
         isStatic: true
       }
@@ -88,6 +86,11 @@ export default class App extends Component {
 
     return {
       physics: { engine, world },
+      obstacle1: Obstacle(world, { x: 0, y: 100 }, 0.4, 400, "left"),
+      obstacle2: Obstacle(world, { x: 0, y: 400 }, 0.4, 400, "right"),
+      obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 400, "left"),
+      obstacle4: Obstacle(world, { x: 0, y: 1000 }, 0.4, 400, "right"),
+      obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 400, "left"),
       leftWall: { body: leftWall, renderer: Wall },
       rightWall: { body: rightWall, renderer: Wall },
       floor: { body: floor, renderer: Wall },
