@@ -42,7 +42,9 @@ export default (world, position, angle, width, side) => {
   let body = Matter.Bodies.rectangle(position.x, position.y, width, height, {
     isStatic: true,
     angle: angle,
-    friction: 0
+    friction: 0,
+    collisionFilter: { group: 1 },
+    restitution: 0.5
   });
 
   let vertices = [
