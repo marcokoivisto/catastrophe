@@ -31,7 +31,7 @@ export default class App extends Component {
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
 
-    let cat = Matter.Bodies.rectangle(Constants.SCREEN_WIDTH / 2, 0, 50, 50);
+    let cat = Matter.Bodies.rectangle(Constants.SCREEN_WIDTH / 2, 0, 70, 70);
 
     let leftWall = Matter.Bodies.rectangle(
       Constants.WALL_WIDTH / 2,
@@ -109,7 +109,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#000"
   },
   gameContainer: {
     position: "absolute",

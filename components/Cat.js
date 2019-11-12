@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text } from "react-native";
+import { Text, Image } from "react-native";
 
 export default class Cat extends Component {
   render() {
@@ -9,18 +9,18 @@ export default class Cat extends Component {
     const y = this.props.body.position.y - height / 2;
 
     return (
-      <Text
+      <Image
+        source={{
+          uri: "https://animated.name/uploads/posts/2016-08/1471201938_602.gif"
+        }}
         style={{
           position: "absolute",
           left: x,
           top: y,
           width: width,
-          height: height,
-          fontSize: width - 6
+          height: height
         }}
-      >
-        🐈
-      </Text>
+      />
     );
   }
 }
