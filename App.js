@@ -94,7 +94,6 @@ export default class App extends Component {
 
   onEvent = e => {
     if (e.type === "game-over") {
-      console.log("Meow!");
       this.setState({
         running: false
       });

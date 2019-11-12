@@ -5,7 +5,6 @@ const Physics = (entities, { touches, time }) => {
   let engine = entities.physics.engine;
   let cat = entities.cat.body;
 
-  console.log(touches);
   touches
     .filter(t => t.type === "press")
     .forEach(t => {
