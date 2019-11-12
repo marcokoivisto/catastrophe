@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, StatusBar, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  StatusBar,
+  Image,
+  TouchableOpacity,
+  Text
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { GameEngine } from "react-native-game-engine";
@@ -37,6 +44,17 @@ export default class App extends Component {
 
     const clouds = Matter.Bodies.rectangle(0, 0, 0, 0, {
       isStatic: true
+    });
+
+    Matter.Events.on(engine, "collisionStart", event => {
+      event.pairs.forEach(pair => {
+        if (
+          pair.bodyA.collisionFilter.group === 1 ||
+          pair.bodyB.collisionFilter.group === 1
+        ) {
+          this.gameEngine.dispatch({ type: "game-over" });
+        }
+      });
     });
 
     return {
@@ -77,6 +95,22 @@ export default class App extends Component {
     };
   };
 
+  onEvent = e => {
+    if (e.type === "game-over") {
+      console.log("Meow!");
+      this.setState({
+        running: false
+      });
+    }
+  };
+
+  reset = () => {
+    this.gameEngine.swap(this.setupWorld());
+    this.setState({
+      running: true
+    });
+  };
+
   render() {
     return (
       <LinearGradient
@@ -97,11 +131,23 @@ export default class App extends Component {
           renderer={CameraRenderer}
           style={styles.gameContainer}
           running={this.state.running}
+          onEvent={this.onEvent}
           systems={[Camera, Physics]}
           entities={this.entities}
         >
           <StatusBar hidden={true} />
         </GameEngine>
+        {!this.state.running && (
+          <TouchableOpacity
+            style={styles.fullScreenButton}
+            onPress={this.reset}
+          >
+            <View style={styles.fullScreen}>
+              <Text style={styles.gameOverText}>Game Over</Text>
+              <Text style={styles.gameOverSubText}>Try Again</Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </LinearGradient>
     );
   }
@@ -118,5 +164,32 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0
+  },
+  gameOverText: {
+    color: "white",
+    fontSize: 48
+  },
+  gameOverSubText: {
+    color: "white",
+    fontSize: 24
+  },
+  fullScreen: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "black",
+    opacity: 0.8,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  fullScreenButton: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flex: 1
   }
 });
