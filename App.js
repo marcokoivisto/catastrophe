@@ -1,17 +1,25 @@
 import React, { Component } from "react";
-import { StyleSheet, StatusBar, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  StatusBar,
+  Image,
+  TouchableOpacity,
+  Text
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
 
 import CameraRenderer from "./CameraRenderer";
-import Obstacle from "./components/Obstacle";
 
 // Systems
 import Physics from "./Physics";
 import Camera from "./Camera";
 
+// Components
+import Obstacle from "./components/Obstacle";
 import Cat from "./components/Cat";
 import Wall from "./components/Wall";
 import Constants from "./Constants";
@@ -31,69 +39,72 @@ export default class App extends Component {
   }
 
   setupWorld = () => {
-    let engine = Matter.Engine.create({ enableSleeping: false });
-    let world = engine.world;
+    const engine = Matter.Engine.create({ enableSleeping: false });
+    const world = engine.world;
 
-    let cat = Matter.Bodies.rectangle(Constants.SCREEN_WIDTH / 2, 0, 70, 70, {
-      restitution: 0.5
+    Matter.Events.on(engine, "collisionStart", event => {
+      event.pairs.forEach(pair => {
+        if (
+          pair.bodyA.collisionFilter.group === 1 ||
+          pair.bodyB.collisionFilter.group === 1
+        ) {
+          this.gameEngine.dispatch({ type: "game-over" });
+        }
+      });
     });
-
-    let leftWall = Matter.Bodies.rectangle(
-      Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_HEIGHT / 2,
-      Constants.WALL_WIDTH,
-      Constants.SCREEN_HEIGHT * 3,
-      {
-        isStatic: true
-      }
-    );
-
-    let rightWall = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_HEIGHT / 2,
-      Constants.WALL_WIDTH,
-      Constants.SCREEN_HEIGHT * 3,
-      {
-        isStatic: true
-      }
-    );
-
-    let floor = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH / 2,
-      Constants.SCREEN_HEIGHT * 2 - Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_WIDTH,
-      Constants.WALL_WIDTH * 4,
-      {
-        isStatic: true
-      }
-    );
-
-    let ceiling = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH / 2,
-      0 - Constants.WALL_WIDTH / 2,
-      Constants.SCREEN_WIDTH,
-      Constants.WALL_WIDTH,
-      {
-        isStatic: true
-      }
-    );
-
-    Matter.World.add(world, [cat, leftWall, rightWall, floor, ceiling]);
 
     return {
       physics: { engine, world },
-      obstacle1: Obstacle(world, { x: 0, y: 100 }, 0.4, 300, "left"),
+      obstacle1: Obstacle(world, { x: 0, y: 100 }, 0.4, 150, "left"),
       obstacle2: Obstacle(world, { x: 0, y: 400 }, 0.4, 200, "right"),
-      obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 150, "left"),
+      obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 250, "left"),
       obstacle4: Obstacle(world, { x: 0, y: 1000 }, 0.4, 300, "right"),
-      obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 200, "left"),
-      leftWall: { body: leftWall, renderer: Wall },
-      rightWall: { body: rightWall, renderer: Wall },
-      floor: { body: floor, renderer: Wall },
+      obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 150, "left"),
+      leftWall: Wall(
+        world,
+        { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },
+        { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 3 }
+      ),
+      rightWall: Wall(
+        world,
+        {
+          x: Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
+          y: Constants.SCREEN_HEIGHT / 2
+        },
+        { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 3 }
+      ),
+      floor: Wall(
+        world,
+        {
+          x: Constants.SCREEN_WIDTH / 2,
+          y: Constants.SCREEN_HEIGHT * 2 - Constants.WALL_WIDTH / 2
+        },
+        { width: Constants.SCREEN_WIDTH, height: Constants.WALL_WIDTH * 4 }
+      ),
       clouds: Clouds(world, 2),
-      cat: { body: cat, size: [70, 70], renderer: Cat },
+      cat: Cat(
+        world,
+        { x: Constants.SCREEN_WIDTH / 3, y: 0 },
+        { width: 70, height: 70 }
+      ),
       camera: { offsetY: 0 }
     };
+  };
+
+  onEvent = e => {
+    if (e.type === "game-over") {
+      console.log("Meow!");
+      this.setState({
+        running: false
+      });
+    }
+  };
+
+  reset = () => {
+    this.gameEngine.swap(this.setupWorld());
+    this.setState({
+      running: true
+    });
   };
 
   render() {
@@ -116,11 +127,23 @@ export default class App extends Component {
           renderer={CameraRenderer}
           style={styles.gameContainer}
           running={this.state.running}
+          onEvent={this.onEvent}
           systems={[Camera, Physics]}
           entities={this.entities}
         >
           <StatusBar hidden={true} />
         </GameEngine>
+        {!this.state.running && (
+          <TouchableOpacity
+            style={styles.fullScreenButton}
+            onPress={this.reset}
+          >
+            <View style={styles.fullScreen}>
+              <Text style={styles.gameOverText}>Game Over</Text>
+              <Text style={styles.gameOverSubText}>Try Again</Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </LinearGradient>
     );
   }
@@ -137,5 +160,32 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0
+  },
+  gameOverText: {
+    color: "white",
+    fontSize: 48
+  },
+  gameOverSubText: {
+    color: "white",
+    fontSize: 24
+  },
+  fullScreen: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "black",
+    opacity: 0.8,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  fullScreenButton: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flex: 1
   }
 });

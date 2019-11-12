@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import { View, Image } from "react-native";
-import Constants from "../Constants";
+import React, { PureComponent } from "react";
+import { Image } from "react-native";
+import Matter from "matter-js";
 
-export default class Wall extends Component {
+export class WallRenderer extends PureComponent {
   render() {
-    const width = this.props.body.bounds.max.x - this.props.body.bounds.min.x;
-    const height = this.props.body.bounds.max.y - this.props.body.bounds.min.y;
-    const x = this.props.body.position.x - width / 2;
-    const y = this.props.body.position.y - height / 2;
+    const { body, size } = this.props;
+    const { width, height } = size;
+
+    const x = body.position.x - width / 2;
+    const y = body.position.y - height / 2;
 
     return (
       <Image
@@ -26,3 +27,22 @@ export default class Wall extends Component {
     );
   }
 }
+
+export default (world, position, size) => {
+  const body = Matter.Bodies.rectangle(
+    position.x,
+    position.y,
+    size.width,
+    size.height,
+    {
+      isStatic: true
+    }
+  );
+  Matter.World.add(world, [body]);
+
+  return {
+    body,
+    size,
+    renderer: <WallRenderer />
+  };
+};

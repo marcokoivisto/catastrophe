@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import { Text, Image } from "react-native";
+import { Image } from "react-native";
 
-export default class Cat extends Component {
+import Matter from "matter-js";
+
+export class CatRenderer extends Component {
   render() {
-    const width = this.props.size[0];
-    const height = this.props.size[1];
-    const x = this.props.body.position.x - width / 2;
-    const y = this.props.body.position.y - height / 2;
+    const { body, size } = this.props;
+    const { width, height } = size;
+    const x = body.position.x - width / 2;
+    const y = body.position.y - height / 2;
 
     return (
       <Image
-        source={{
-          uri: "https://animated.name/uploads/posts/2016-08/1471201938_602.gif"
-        }}
+        source={require("../assets/cat.gif")}
         style={{
           position: "absolute",
           left: x,
@@ -24,3 +24,23 @@ export default class Cat extends Component {
     );
   }
 }
+
+export default (world, position, size) => {
+  const body = Matter.Bodies.rectangle(
+    position.x,
+    position.y,
+    size.width,
+    size.height,
+    {
+      restitution: 0.5
+    }
+  );
+
+  Matter.World.add(world, [body]);
+
+  return {
+    body,
+    size,
+    renderer: <CatRenderer />
+  };
+};
