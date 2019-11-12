@@ -31,12 +31,7 @@ export default class App extends Component {
     let engine = Matter.Engine.create({ enableSleeping: false });
     let world = engine.world;
 
-    let cat = Matter.Bodies.rectangle(
-      Constants.SCREEN_WIDTH / 2,
-      Constants.SCREEN_HEIGHT / 3,
-      50,
-      50
-    );
+    let cat = Matter.Bodies.rectangle(Constants.SCREEN_WIDTH / 2, 0, 50, 50);
 
     let leftWall = Matter.Bodies.rectangle(
       Constants.WALL_WIDTH / 2,
