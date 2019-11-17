@@ -1,5 +1,5 @@
 import Matter from "matter-js";
-import Constants from "./Constants";
+import Constants from "../Constants";
 
 const Physics = (entities, { touches, time }) => {
   let engine = entities.physics.engine;

@@ -1,23 +1,16 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  StatusBar,
-  Image,
-  TouchableOpacity,
-  Text
-} from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Icon from "@expo/vector-icons/FontAwesome5";
 
 import { GameEngine } from "react-native-game-engine";
 import Matter from "matter-js";
 
+// Utils
 import CameraRenderer from "./CameraRenderer";
 
 // Systems
-import Physics from "./Physics";
-import Camera from "./Camera";
+import Physics from "./systems/Physics";
+import Camera from "./systems/Camera";
 
 // Components
 import Obstacle from "./components/Obstacle";
@@ -25,6 +18,9 @@ import Cat from "./components/Cat";
 import Wall from "./components/Wall";
 import Constants from "./Constants";
 import Clouds from "./components/Clouds";
+
+// Menus
+import GameOver from "./menus/GameOver";
 
 export default class App extends Component {
   constructor(props) {
@@ -133,20 +129,7 @@ export default class App extends Component {
         >
           <StatusBar hidden={true} />
         </GameEngine>
-        {!this.state.running && (
-          <TouchableOpacity
-            style={styles.fullScreenButton}
-            onPress={this.reset}
-          >
-            <View style={styles.fullScreen}>
-              <Icon name="skull-crossbones" size={68} color="#fff" solid />
-              <Text style={styles.gameOverText}>Game Over</Text>
-              <Text style={styles.gameOverSubText}>
-                Press anywhere to try again
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
+        {!this.state.running && <GameOver onReset={this.reset} />}
       </LinearGradient>
     );
   }
@@ -163,34 +146,5 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0
-  },
-  gameOverText: {
-    marginTop: 20,
-    color: "white",
-    fontSize: 48,
-    fontWeight: "bold"
-  },
-  gameOverSubText: {
-    color: "white",
-    fontSize: 20,
-    marginTop: 15
-  },
-  fullScreen: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0,0,0,0.8)",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  fullScreenButton: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flex: 1
   }
 });
