@@ -10,7 +10,7 @@ const Obstacles = (entities, { dispatch }) => {
   //   .filter(key => entities[key].type === Constants.OBSTACLE_TYPE.KILL)
   //   .map(key => entities[key].body);
 
-  // I think [reduce] + [push] is O(n) and [filter] + [fap] is O(n^2) so this should be faster but not sure
+  // I think [reduce] + [push] is O(n) and [filter] + [map] is O(n^2) so this should be faster but not sure
   const bodies = Object.keys(entities).reduce((bodies, key) => {
     if (entities[key].type === Constants.OBSTACLE_TYPE.KILL)
       bodies.push(entities[key].body);
