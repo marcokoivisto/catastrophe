@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-
 import { GameEngine } from "react-native-game-engine";
-import Matter from "matter-js";
 
 // Utils
 import CameraRenderer from "./CameraRenderer";
@@ -11,16 +9,13 @@ import CameraRenderer from "./CameraRenderer";
 // Systems
 import Physics from "./systems/Physics";
 import Camera from "./systems/Camera";
-
-// Components
-import Obstacle from "./components/Obstacle";
-import Cat from "./components/Cat";
-import Wall from "./components/Wall";
-import Constants from "./Constants";
-import Clouds from "./components/Clouds";
+import Obstacles from "./systems/Obstacles";
 
 // Menus
 import GameOver from "./menus/GameOver";
+
+// Levels
+import Level1 from "./levels/Level1";
 
 export default class App extends Component {
   constructor(props) {
@@ -32,72 +27,20 @@ export default class App extends Component {
 
     this.gameEngine = null;
 
-    this.entities = this.setupWorld();
+    this.entities = Level1(this.gameEngine);
   }
 
-  setupWorld = () => {
-    const engine = Matter.Engine.create({ enableSleeping: false });
-    const world = engine.world;
-
-    Matter.Events.on(engine, "collisionStart", event => {
-      event.pairs.forEach(pair => {
-        if (
-          pair.bodyA.collisionFilter.group === 1 ||
-          pair.bodyB.collisionFilter.group === 1
-        ) {
-          this.gameEngine.dispatch({ type: "game-over" });
-        }
-      });
-    });
-
-    return {
-      physics: { engine, world },
-      obstacle1: Obstacle(world, { x: 0, y: 100 }, 0.4, 150, "left"),
-      obstacle2: Obstacle(world, { x: 0, y: 400 }, 0.4, 200, "right"),
-      obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 250, "left"),
-      obstacle4: Obstacle(world, { x: 0, y: 1000 }, 0.4, 300, "right"),
-      obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 150, "left"),
-      leftWall: Wall(
-        world,
-        { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },
-        { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 3 }
-      ),
-      rightWall: Wall(
-        world,
-        {
-          x: Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
-          y: Constants.SCREEN_HEIGHT / 2
-        },
-        { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 3 }
-      ),
-      floor: Wall(
-        world,
-        {
-          x: Constants.SCREEN_WIDTH / 2,
-          y: Constants.SCREEN_HEIGHT * 2 - Constants.WALL_WIDTH / 2
-        },
-        { width: Constants.SCREEN_WIDTH, height: Constants.WALL_WIDTH * 4 }
-      ),
-      clouds: Clouds(world, 2),
-      cat: Cat(
-        world,
-        { x: Constants.SCREEN_WIDTH / 3, y: 0 },
-        { width: 70, height: 70 }
-      ),
-      camera: { offsetY: 0 }
-    };
-  };
-
-  onEvent = e => {
-    if (e.type === "game-over") {
-      this.setState({
-        running: false
-      });
+  handleEvent = e => {
+    switch (e.type) {
+      case "game-over":
+        this.setState({
+          running: false
+        });
     }
   };
 
   reset = () => {
-    this.gameEngine.swap(this.setupWorld());
+    this.gameEngine.swap(Level1());
     this.setState({
       running: true
     });
@@ -117,14 +60,12 @@ export default class App extends Component {
         ]}
       >
         <GameEngine
-          ref={ref => {
-            this.gameEngine = ref;
-          }}
+          ref={ref => (this.gameEngine = ref)}
           renderer={CameraRenderer}
           style={styles.gameContainer}
           running={this.state.running}
-          onEvent={this.onEvent}
-          systems={[Camera, Physics]}
+          onEvent={this.handleEvent}
+          systems={[Camera, Physics, Obstacles]}
           entities={this.entities}
         >
           <StatusBar hidden={true} />
