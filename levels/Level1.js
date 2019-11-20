@@ -45,7 +45,7 @@ export default Level1 = () => {
     cat: Cat(
       world,
       { x: Constants.SCREEN_WIDTH / 3, y: 0 },
-      { width: 70, height: 70 }
+      { width: Constants.CAT_SIZE.WIDTH, height: Constants.CAT_SIZE.HEIGHT }
     ),
     camera: { offsetY: 0 }
   };

@@ -5,7 +5,7 @@ import Matter from "matter-js";
 
 export class CatRenderer extends Component {
   render() {
-    const { body, size } = this.props;
+    const { body, size, rotation } = this.props;
     const { width, height } = size;
     const x = body.position.x - width / 2;
     const y = body.position.y - height / 2;
@@ -18,14 +18,15 @@ export class CatRenderer extends Component {
           left: x,
           top: y,
           width: width,
-          height: height
+          height: height,
+          transform: [{ rotateZ: rotation + "rad" }]
         }}
       />
     );
   }
 }
 
-export default (world, position, size) => {
+export default (world, position, size, rotation = 0) => {
   const body = Matter.Bodies.rectangle(
     position.x,
     position.y,
@@ -41,6 +42,7 @@ export default (world, position, size) => {
   return {
     body,
     size,
+    rotation,
     renderer: <CatRenderer />
   };
 };

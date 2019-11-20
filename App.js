@@ -10,6 +10,7 @@ import CameraRenderer from "./CameraRenderer";
 import Physics from "./systems/Physics";
 import Camera from "./systems/Camera";
 import Obstacles from "./systems/Obstacles";
+import Cat from "./systems/Cat";
 
 // Menus
 import GameOver from "./menus/GameOver";
@@ -27,7 +28,7 @@ export default class App extends Component {
 
     this.gameEngine = null;
 
-    this.entities = Level1(this.gameEngine);
+    this.entities = Level1();
   }
 
   handleEvent = e => {
@@ -65,7 +66,7 @@ export default class App extends Component {
           style={styles.gameContainer}
           running={this.state.running}
           onEvent={this.handleEvent}
-          systems={[Camera, Physics, Obstacles]}
+          systems={[Camera, Physics, Obstacles, Cat]}
           entities={this.entities}
         >
           <StatusBar hidden={true} />
