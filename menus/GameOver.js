@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { StyleSheet, View, Text, SafeAreaView } from "react-native";
 import { useHistory } from "react-router-native";
 import PropTypes from "prop-types";
