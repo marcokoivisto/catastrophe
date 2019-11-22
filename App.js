@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet, StatusBar, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameEngine } from "react-native-game-engine";
+import { NativeRouter, Route } from "react-router-native";
 
 // Utils
 import CameraRenderer from "./CameraRenderer";
@@ -17,6 +18,9 @@ import GameOver from "./menus/GameOver";
 
 // Levels
 import Level1 from "./levels/Level1";
+import MainMenu from "./screens/MainMenu";
+import LevelMap from "./screens/LevelMap";
+import About from "./screens/About";
 
 export default class App extends Component {
   constructor(props) {
@@ -49,30 +53,40 @@ export default class App extends Component {
 
   render() {
     return (
-      <LinearGradient
-        style={styles.container}
-        colors={[
-          "#BCC3DB",
-          "#BCC3DB",
-          "#BCC3DB",
-          "#D6B7C5",
-          "#D6B7C5",
-          "#D6B7C5"
-        ]}
-      >
-        <GameEngine
-          ref={ref => (this.gameEngine = ref)}
-          renderer={CameraRenderer}
-          style={styles.gameContainer}
-          running={this.state.running}
-          onEvent={this.handleEvent}
-          systems={[Camera, Physics, Obstacles, Cat]}
-          entities={this.entities}
-        >
-          <StatusBar hidden={true} />
-        </GameEngine>
-        {!this.state.running && <GameOver onReset={this.reset} />}
-      </LinearGradient>
+      <NativeRouter>
+        <Route exact path="/" component={MainMenu} />
+        <Route path="/levels" component={LevelMap} />
+        <Route path="/about" component={About} />
+        <Route
+          path="/play"
+          component={() => (
+            <LinearGradient
+              style={styles.container}
+              colors={[
+                "#BCC3DB",
+                "#BCC3DB",
+                "#BCC3DB",
+                "#D6B7C5",
+                "#D6B7C5",
+                "#D6B7C5"
+              ]}
+            >
+              <GameEngine
+                ref={ref => (this.gameEngine = ref)}
+                renderer={CameraRenderer}
+                style={styles.gameContainer}
+                running={this.state.running}
+                onEvent={this.handleEvent}
+                systems={[Camera, Physics, Obstacles, Cat]}
+                entities={this.entities}
+              >
+                <StatusBar hidden={true} />
+              </GameEngine>
+              {!this.state.running && <GameOver onReset={this.reset} />}
+            </LinearGradient>
+          )}
+        />
+      </NativeRouter>
     );
   }
 }

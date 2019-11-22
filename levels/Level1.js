@@ -1,7 +1,7 @@
 import Matter from "matter-js";
 
 // Constants
-import Constants from "../Constants";
+import Constants from "../constants/Constants";
 
 // Components
 import Obstacle from "../components/Obstacle";

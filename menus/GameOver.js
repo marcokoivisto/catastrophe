@@ -1,26 +1,52 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, Text, SafeAreaView } from "react-native";
+import { useHistory } from "react-router-native";
 import PropTypes from "prop-types";
 import Icon from "@expo/vector-icons/FontAwesome5";
+import Spacing from "../components/Spacing";
+import Button from "../components/Button";
+import { utilities } from "../constants/Layout";
 
-class GameOver extends PureComponent {
-  render() {
-    return (
-      <TouchableOpacity
-        style={styles.fullScreenButton}
-        onPress={this.props.onReset}
-      >
-        <View style={styles.fullScreen}>
-          <Icon name="skull-crossbones" size={68} color="#fff" solid />
+const GameOver = props => {
+  const { container, contentCenter, textCenter } = utilities;
+  const { onReset } = props;
+  const history = useHistory();
+
+  return (
+    <View style={[styles.fullScreen, container, contentCenter]}>
+      <SafeAreaView>
+        <View>
+          <Icon
+            style={textCenter}
+            name="skull-crossbones"
+            size={68}
+            color="#fff"
+            solid
+          />
           <Text style={styles.gameOverText}>Game Over</Text>
-          <Text style={styles.gameOverSubText}>
-            Press anywhere to try again
-          </Text>
+          <Spacing />
+          <Button
+            backgroundColor="#000"
+            color="#fff"
+            flexGrow={false}
+            title="Retry"
+            onPress={onReset}
+            block
+          />
+          <Spacing height={15} />
+          <Button
+            backgroundColor="#000"
+            color="#fff"
+            flexGrow={false}
+            title="Quit"
+            onPress={() => history.push("/levels")}
+            block
+          />
         </View>
-      </TouchableOpacity>
-    );
-  }
-}
+      </SafeAreaView>
+    </View>
+  );
+};
 
 GameOver.propTypes = {
   onReset: PropTypes.func.isRequired
@@ -44,17 +70,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0,0,0,0.8)",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  fullScreenButton: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flex: 1
+    backgroundColor: "rgba(0,0,0,0.8)"
   }
 });
 

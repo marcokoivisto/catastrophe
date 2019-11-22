@@ -1,5 +1,5 @@
 import Matter from "matter-js";
-import Constants from "../Constants";
+import Constants from "../constants/Constants";
 
 const Obstacles = (entities, { dispatch }) => {
   const cat = entities.cat;

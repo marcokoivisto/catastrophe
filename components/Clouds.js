@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Image } from "react-native";
 import Matter from "matter-js";
-import Constants from "../Constants";
+import Constants from "../constants/Constants";
 
 export class CloudsRenderer extends Component {
   render() {

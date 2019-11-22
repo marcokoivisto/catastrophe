@@ -1,4 +1,4 @@
-import Constants from "../Constants";
+import Constants from "../constants/Constants";
 
 export default (entities, { screen }) => {
   let cat = entities.cat;

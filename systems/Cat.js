@@ -1,4 +1,4 @@
-import Constants from "../Constants";
+import Constants from "../constants/Constants";
 import { rotate } from "../utils";
 
 let lastPress = null;

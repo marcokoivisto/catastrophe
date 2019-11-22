@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { View } from "react-native";
 import Matter from "matter-js";
-import Constants from "../Constants";
+import Constants from "../constants/Constants";
 
 export class ObstacleRenderer extends PureComponent {
   render() {
