@@ -7,7 +7,6 @@ import { GameEngine } from "react-native-game-engine";
 import CameraRenderer from "./CameraRenderer";
 
 // Systems
-import Physics from "./systems/Physics";
 import Camera from "./systems/Camera";
 import Obstacles from "./systems/Obstacles";
 import Cat from "./systems/Cat";
@@ -66,7 +65,7 @@ export default class App extends Component {
           style={styles.gameContainer}
           running={this.state.running}
           onEvent={this.handleEvent}
-          systems={[Camera, Physics, Obstacles, Cat]}
+          systems={[Camera, Obstacles, Cat]}
           entities={this.entities}
         >
           <StatusBar hidden={true} />
