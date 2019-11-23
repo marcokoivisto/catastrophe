@@ -1,5 +1,6 @@
 import Matter from "matter-js";
-import Constants from "../Constants";
+import Constants from "../constants/Constants";
+import { Vibration } from "react-native";
 
 const Obstacles = (entities, { dispatch }) => {
   const cat = entities.cat;
@@ -19,7 +20,10 @@ const Obstacles = (entities, { dispatch }) => {
 
   const collisions = Matter.Query.collides(cat.body, bodies);
 
-  if (collisions.length) dispatch({ type: "game-over" });
+  if (collisions.length) {
+    Vibration.vibrate(500);
+    dispatch({ type: "game-over" });
+  }
 
   return entities;
 };
