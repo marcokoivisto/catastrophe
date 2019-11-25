@@ -60,7 +60,7 @@ export default (world, position, angle, width, side) => {
 
   return {
     body,
-    type: Constants.OBSTACLE_TYPE.KILL,
+    type: Constants.OBJECT_TYPE.OBSTACLE_KILL,
     size: { width, height },
     renderer: <ObstacleRenderer />
   };
