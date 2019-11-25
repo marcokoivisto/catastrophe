@@ -8,6 +8,7 @@ import Obstacle from "../components/Obstacle";
 import Cat from "../components/Cat";
 import Wall from "../components/Wall";
 import Clouds from "../components/Clouds";
+import Tuna from "../components/Tuna";
 
 export default Level1 = () => {
   const engine = Matter.Engine.create({ enableSleeping: false });
@@ -45,8 +46,48 @@ export default Level1 = () => {
     cat: Cat(
       world,
       { x: Constants.SCREEN_WIDTH / 3, y: 0 },
-      { width: Constants.CAT_SIZE.WIDTH, height: Constants.CAT_SIZE.HEIGHT }
+      Constants.CAT_SIZE
     ),
+    tuna1: Tuna(world, {
+      x: 100,
+      y: 100
+    }),
+    tuna2: Tuna(world, {
+      x: 120,
+      y: 200
+    }),
+    tuna3: Tuna(world, {
+      x: 130,
+      y: 300
+    }),
+    tuna4: Tuna(world, {
+      x: 150,
+      y: 400
+    }),
+    tuna5: Tuna(world, {
+      x: 180,
+      y: 700
+    }),
+    tuna6: Tuna(world, {
+      x: 200,
+      y: 800
+    }),
+    tuna7: Tuna(world, {
+      x: 200,
+      y: 1000
+    }),
+    tuna8: Tuna(world, {
+      x: 200,
+      y: 1000
+    }),
+    tuna9: Tuna(world, {
+      x: 200,
+      y: 1000
+    }),
+    tuna10: Tuna(world, {
+      x: 200,
+      y: 1000
+    }),
     camera: { offsetY: 0 }
   };
 };

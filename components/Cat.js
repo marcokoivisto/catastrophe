@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Image } from "react-native";
 
 import Matter from "matter-js";
+import Constants from "../constants/Constants";
 
 export class CatRenderer extends Component {
   render() {
@@ -33,7 +34,10 @@ export default (world, position, size, rotation = 0) => {
     size.width,
     size.height,
     {
-      restitution: 0.5
+      restitution: 0.5,
+      collisionFilter: {
+        mask: Constants.COLLISIONS.default
+      }
     }
   );
 

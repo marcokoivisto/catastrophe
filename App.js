@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet, StatusBar, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameEngine } from "react-native-game-engine";
 import { NativeRouter, Route } from "react-router-native";
@@ -12,6 +12,7 @@ import { playBackgroundSound, playLevelSound } from "./utils/sound";
 import Camera from "./systems/Camera";
 import Obstacles from "./systems/Obstacles";
 import Cat from "./systems/Cat";
+import Tuna from "./systems/Tuna";
 
 // Menus
 import GameOver from "./menus/GameOver";
@@ -21,17 +22,18 @@ import Level1 from "./levels/Level1";
 import MainMenu from "./screens/MainMenu";
 import LevelMap from "./screens/LevelMap";
 import About from "./screens/About";
+import Constants from "./constants/Constants";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      running: true
+      running: true,
+      score: 0
     };
 
     this.gameEngine = null;
-
     this.entities = Level1();
 
     playLevelSound();
@@ -44,17 +46,28 @@ export default class App extends Component {
         this.setState({
           running: false
         });
+        break;
+      case "tuna-collected": {
+        const { score } = this.state;
+        this.setState({
+          score: score + 1
+        });
+        break;
+      }
     }
   };
 
   reset = () => {
-    this.gameEngine.swap(Level1());
+    this.entities = Level1(); // rebuild entities
+    this.gameEngine.swap(this.entities); // load new entities
     this.setState({
+      score: 0,
       running: true
     });
   };
 
   render() {
+    const { score } = this.state;
     return (
       <NativeRouter>
         <Route exact path="/" component={MainMenu} />
@@ -63,30 +76,48 @@ export default class App extends Component {
         <Route
           path="/play"
           component={() => (
-            <LinearGradient
-              style={styles.container}
-              colors={[
-                "#BCC3DB",
-                "#BCC3DB",
-                "#BCC3DB",
-                "#D6B7C5",
-                "#D6B7C5",
-                "#D6B7C5"
-              ]}
-            >
-              <GameEngine
-                ref={ref => (this.gameEngine = ref)}
-                renderer={CameraRenderer}
-                style={styles.gameContainer}
-                running={this.state.running}
-                onEvent={this.handleEvent}
-                systems={[Camera, Obstacles, Cat]}
-                entities={this.entities}
+            <>
+              <Text
+                style={{
+                  position: "absolute",
+                  right: 40,
+                  top: 30,
+                  zIndex: 1,
+                  fontSize: 24,
+                  fontWeight: "900",
+                  color: "#fff",
+                  textShadowColor: "#333",
+                  textShadowOffset: { width: -1, height: 1 },
+                  textShadowRadius: 1
+                }}
               >
-                <StatusBar hidden={true} />
-              </GameEngine>
-              {!this.state.running && <GameOver onReset={this.reset} />}
-            </LinearGradient>
+                SCORE {score}
+              </Text>
+              <LinearGradient
+                style={styles.container}
+                colors={[
+                  "#BCC3DB",
+                  "#BCC3DB",
+                  "#BCC3DB",
+                  "#D6B7C5",
+                  "#D6B7C5",
+                  "#D6B7C5"
+                ]}
+              >
+                <GameEngine
+                  ref={ref => (this.gameEngine = ref)}
+                  renderer={CameraRenderer}
+                  style={styles.gameContainer}
+                  running={this.state.running}
+                  onEvent={this.handleEvent}
+                  systems={[Camera, Obstacles, Cat, Tuna]}
+                  entities={this.entities}
+                >
+                  <StatusBar hidden={true} />
+                </GameEngine>
+                {!this.state.running && <GameOver onReset={this.reset} />}
+              </LinearGradient>
+            </>
           )}
         />
       </NativeRouter>
