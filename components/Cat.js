@@ -1,19 +1,26 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
-
 import Matter from "matter-js";
+
+import CatFalling from "../assets/cat.gif";
+
 import Constants from "../constants/Constants";
+
+const CAT_ACTIONS = {
+  falling: Image.resolveAssetSource(CatFalling)
+};
 
 export class CatRenderer extends Component {
   render() {
-    const { body, size, rotation } = this.props;
+    const { action, body, size, direction, rotation } = this.props;
     const { width, height } = size;
     const x = body.position.x - width / 2;
     const y = body.position.y - height / 2;
+    const source = CAT_ACTIONS[action];
 
     return (
       <Image
-        source={require("../assets/cat.gif")}
+        source={source}
         style={{
           position: "absolute",
           left: x,
@@ -21,7 +28,10 @@ export class CatRenderer extends Component {
           width: width,
           height: height,
           zIndex: 1,
-          transform: [{ rotateZ: rotation + "rad" }]
+          transform: [
+            { rotateZ: rotation + "rad" },
+            { rotateY: (direction === "right" ? 180 : 0) + "deg" }
+          ]
         }}
       />
     );
@@ -48,6 +58,8 @@ export default (world, position, size, rotation = 0) => {
     body,
     size,
     rotation,
+    action: "falling",
+    direction: "right",
     renderer: <CatRenderer />
   };
 };

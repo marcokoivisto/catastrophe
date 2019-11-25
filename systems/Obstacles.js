@@ -22,6 +22,7 @@ const Obstacles = (entities, { dispatch }) => {
 
   if (collisions.length) {
     Vibration.vibrate(500);
+    cat.direction = cat.direction === "left" ? "right" : "left";
     dispatch({ type: "lost-life" });
   }
 

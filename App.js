@@ -34,8 +34,8 @@ export default class App extends Component {
     this.gameEngine = null;
     this.entities = Level1();
 
-    playLevelSound();
-    playBackgroundSound();
+    // playLevelSound();
+    // playBackgroundSound();
   }
 
   handleEvent = e => {
