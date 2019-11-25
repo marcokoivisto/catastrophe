@@ -43,7 +43,9 @@ export default (world, position, angle, width, side) => {
     isStatic: true,
     angle: angle,
     friction: 0,
-    collisionFilter: { group: 1 },
+    collisionFilter: {
+      mask: Constants.COLLISIONS.default
+    },
     restitution: 0.5
   });
 

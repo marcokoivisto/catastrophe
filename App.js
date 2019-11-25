@@ -8,10 +8,7 @@ import { NativeRouter, Route } from "react-router-native";
 import CameraRenderer from "./CameraRenderer";
 
 // Systems
-import Camera from "./systems/Camera";
-import Obstacles from "./systems/Obstacles";
-import Cat from "./systems/Cat";
-import Tuna from "./systems/Tuna";
+import Systems from "./systems";
 
 // Menus
 import GameOver from "./menus/GameOver";
@@ -29,7 +26,8 @@ export default class App extends Component {
 
     this.state = {
       running: true,
-      score: 0
+      score: 0,
+      lifes: 9
     };
 
     this.gameEngine = null;
@@ -44,9 +42,18 @@ export default class App extends Component {
         });
         break;
       case "tuna-collected": {
-        const { score } = this.state;
+        let { score } = this.state;
+        score += 1;
         this.setState({
-          score: score + 1
+          score
+        });
+        break;
+      }
+      case "lost-life": {
+        let { lifes } = this.state;
+        lifes -= 1;
+        this.setState({
+          lifes
         });
         break;
       }
@@ -63,7 +70,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { score } = this.state;
+    const { score, lifes } = this.state;
     return (
       <NativeRouter>
         <Route exact path="/" component={MainMenu} />
@@ -89,6 +96,22 @@ export default class App extends Component {
               >
                 SCORE {score}
               </Text>
+              <Text
+                style={{
+                  position: "absolute",
+                  left: 40,
+                  top: 30,
+                  zIndex: 1,
+                  fontSize: 24,
+                  fontWeight: "900",
+                  color: "#fff",
+                  textShadowColor: "#333",
+                  textShadowOffset: { width: -1, height: 1 },
+                  textShadowRadius: 1
+                }}
+              >
+                LIFES x{lifes}
+              </Text>
               <LinearGradient
                 style={styles.container}
                 colors={[
@@ -106,7 +129,7 @@ export default class App extends Component {
                   style={styles.gameContainer}
                   running={this.state.running}
                   onEvent={this.handleEvent}
-                  systems={[Camera, Obstacles, Cat, Tuna]}
+                  systems={Systems}
                   entities={this.entities}
                 >
                   <StatusBar hidden={true} />

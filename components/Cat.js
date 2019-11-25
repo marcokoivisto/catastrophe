@@ -20,6 +20,7 @@ export class CatRenderer extends Component {
           top: y,
           width: width,
           height: height,
+          zIndex: 1,
           transform: [{ rotateZ: rotation + "rad" }]
         }}
       />

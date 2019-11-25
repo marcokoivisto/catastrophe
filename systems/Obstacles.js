@@ -22,7 +22,7 @@ const Obstacles = (entities, { dispatch }) => {
 
   if (collisions.length) {
     Vibration.vibrate(500);
-    dispatch({ type: "game-over" });
+    dispatch({ type: "lost-life" });
   }
 
   return entities;
