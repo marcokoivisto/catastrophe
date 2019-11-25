@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "expo": "^35.0.0",
+    "expo-av": "^7.0.1",
     "expo-linear-gradient": "~7.0.0",
     "matter-js": "^0.14.2",
     "prop-types": "^15.7.2",
