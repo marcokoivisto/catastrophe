@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, StatusBar, Text } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameEngine } from "react-native-game-engine";
 import { NativeRouter, Route } from "react-router-native";
 
 // Utils
 import CameraRenderer from "./CameraRenderer";
+import { playBackgroundSound, playLevelSound } from "./utils/sound";
 
 // Systems
 import Camera from "./systems/Camera";
@@ -32,6 +33,9 @@ export default class App extends Component {
     this.gameEngine = null;
 
     this.entities = Level1();
+
+    playLevelSound();
+    playBackgroundSound();
   }
 
   handleEvent = e => {

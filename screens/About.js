@@ -4,6 +4,7 @@ import { utilities } from "../constants/Layout";
 import { useHistory } from "react-router-native";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
+import { playBackgroundSound } from "../utils/sound";
 
 export default About = () => {
   const { container, contentCenter, headline, textCenter } = utilities;
