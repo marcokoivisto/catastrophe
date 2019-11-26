@@ -1,7 +1,7 @@
 import Matter from "matter-js";
 import Constants from "../constants/Constants";
-import { Vibration } from "react-native";
 import { remove } from "../utils";
+import { tunaSound } from "../utils/sound";
 
 const Tuna = (entities, { dispatch }) => {
   const cat = entities.cat;
@@ -18,7 +18,7 @@ const Tuna = (entities, { dispatch }) => {
     // const collisions = Matter.Query.collides(cat.body, [b.body]);
 
     if (collisions.length) {
-      Vibration.vibrate(100);
+      tunaSound.replayAsync();
       remove(key, entities);
       dispatch({ type: "tuna-collected" });
     }

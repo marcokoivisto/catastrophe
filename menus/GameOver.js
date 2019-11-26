@@ -6,11 +6,19 @@ import Icon from "@expo/vector-icons/FontAwesome5";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
 import { utilities } from "../constants/Layout";
+import { levelSound, backgroundSound } from "../utils/sound";
 
 const GameOver = props => {
   const { container, contentCenter, textCenter } = utilities;
   const { onReset } = props;
   const history = useHistory();
+
+  const quit = () => {
+    onReset();
+    levelSound.stopAsync();
+    backgroundSound.playAsync();
+    history.push("/levels");
+  };
 
   return (
     <View style={[styles.fullScreen, container, contentCenter]}>
@@ -39,7 +47,7 @@ const GameOver = props => {
             color="#fff"
             flexGrow={false}
             title="Quit"
-            onPress={() => history.push("/levels")}
+            onPress={quit}
             block
           />
         </View>

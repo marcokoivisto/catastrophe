@@ -1,23 +1,34 @@
 import { Audio } from "expo-av";
 
-const player = new Audio.Sound();
+const backgroundSound = new Audio.Sound();
+const levelSound = new Audio.Sound();
+const tunaSound = new Audio.Sound();
+const obstacleSound = new Audio.Sound();
 
-const playBackgroundSound = () => {
-  return playSound(player, require("../assets/sounds/background.mp3"), true);
+const loadSounds = async () => {
+  await loadSound(
+    backgroundSound,
+    require("../assets/sounds/background.mp3"),
+    true
+  );
+  await loadSound(levelSound, require("../assets/sounds/level.mp3"), true);
+  await loadSound(tunaSound, require("../assets/sounds/meow.mp3"), false);
+  await loadSound(
+    obstacleSound,
+    require("../assets/sounds/obstacle.mp3"),
+    false
+  );
+
+  return { backgroundSound, levelSound };
 };
 
-const playLevelSound = () => {
-  return playSound(player, require("../assets/sounds/level.mp3"), true);
-};
-
-const playSound = async (player, file, shouldLoop) => {
+const loadSound = async (player, file, shouldLoop) => {
   try {
     await player.loadAsync(file);
-    await player.playAsync();
     await player.setIsLoopingAsync(shouldLoop);
   } catch (error) {
     console.log(error);
   }
 };
 
-export { playBackgroundSound, playLevelSound };
+export { loadSounds, backgroundSound, levelSound, tunaSound, obstacleSound };

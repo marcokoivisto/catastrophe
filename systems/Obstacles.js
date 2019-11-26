@@ -1,6 +1,7 @@
 import Matter from "matter-js";
 import Constants from "../constants/Constants";
 import { Vibration } from "react-native";
+import { obstacleSound } from "../utils/sound";
 
 const Obstacles = (entities, { dispatch }) => {
   const cat = entities.cat;
@@ -21,6 +22,7 @@ const Obstacles = (entities, { dispatch }) => {
   const collisions = Matter.Query.collides(cat.body, bodies);
 
   if (collisions.length) {
+    obstacleSound.replayAsync();
     Vibration.vibrate(500);
     dispatch({ type: "game-over" });
   }
