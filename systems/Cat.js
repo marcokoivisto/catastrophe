@@ -1,6 +1,11 @@
 import Matter from "matter-js";
 import Constants from "../constants/Constants";
-import { rotate } from "../utils";
+
+import {
+  canStartRotating,
+  startRotating,
+  startLanding
+} from "../utils/catActionTimers";
 
 let lastPress = null;
 
@@ -10,9 +15,9 @@ const Cat = (entities, { touches, time }) => {
 
   touches.filter(touch => {
     if (touch.type === "press") {
-      HandlePress(cat);
+      handlePress(cat);
     } else if (touch.type === "move") {
-      HandleMove(cat, touch);
+      handleMove(cat, touch);
     }
   });
 
@@ -21,19 +26,22 @@ const Cat = (entities, { touches, time }) => {
   return entities;
 };
 
-const HandlePress = cat => {
+const handlePress = cat => {
   const now = new Date().getTime();
-  if (lastPress && now - lastPress < Constants.DOUBLE_PRESS_DELAY) {
-    // Rotate physics model and visuals
-    // Cat should rotate back after a set amount of time, this is for demo purposes
-    rotate(cat, cat.rotation + Math.PI);
+
+  if (
+    canStartRotating() &&
+    lastPress &&
+    now - lastPress < Constants.DOUBLE_PRESS_DELAY
+  ) {
+    turnAround(cat);
     lastPress = null;
   } else {
     lastPress = now;
   }
 };
 
-const HandleMove = (cat, touch) => {
+const handleMove = (cat, touch) => {
   // TODO Needs fine tuning
   const { pageX } = touch.event;
   const maxForce = 0.0015;
@@ -57,6 +65,14 @@ const HandleMove = (cat, touch) => {
     x: force,
     y: 0
   });
+};
+
+const turnAround = cat => {
+  startRotating(() => (cat.action = "rotating")).then(() =>
+    startLanding(() => (cat.action = "landing")).then(
+      () => (cat.action = "falling")
+    )
+  );
 };
 
 export default Cat;

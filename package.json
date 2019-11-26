@@ -18,7 +18,8 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-game-engine": "^0.12.3",
     "react-native-web": "^0.11.7",
-    "react-router-native": "^5.1.2"
+    "react-router-native": "^5.1.2",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0"

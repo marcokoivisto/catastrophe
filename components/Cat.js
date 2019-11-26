@@ -3,11 +3,17 @@ import { Image } from "react-native";
 import Matter from "matter-js";
 
 import CatFalling from "../assets/cat.gif";
+import CatHurting from "../assets/gravestone.png";
+import CatRotating from "../assets/clouds.png";
+import CatLanding from "../assets/brick.png";
 
 import Constants from "../constants/Constants";
 
 const CAT_ACTIONS = {
-  falling: Image.resolveAssetSource(CatFalling)
+  falling: Image.resolveAssetSource(CatFalling),
+  hurting: Image.resolveAssetSource(CatHurting),
+  rotating: Image.resolveAssetSource(CatRotating),
+  landing: Image.resolveAssetSource(CatLanding)
 };
 
 export class CatRenderer extends Component {

@@ -3,6 +3,8 @@ import Constants from "../constants/Constants";
 import { Vibration } from "react-native";
 import { obstacleSound } from "../utils/sound";
 
+import { startHurting } from "../utils/catActionTimers";
+
 const Obstacles = (entities, { dispatch }) => {
   const cat = entities.cat;
 
@@ -22,13 +24,24 @@ const Obstacles = (entities, { dispatch }) => {
   const collisions = Matter.Query.collides(cat.body, bodies);
 
   if (collisions.length) {
-    obstacleSound.replayAsync();
-    Vibration.vibrate(500);
-    cat.direction = cat.direction === "left" ? "right" : "left";
-    dispatch({ type: "lost-life" });
+    cat.direction =
+      cat.body.position.x > Constants.SCREEN_WIDTH / 2 ? "right" : "left";
+
+    if (cat.action !== "landing") hurtCat(cat, dispatch);
   }
 
   return entities;
+};
+
+const hurtCat = (cat, dispatch) => {
+  startHurting(() => (cat.action = "hurting")).then(
+    () => (cat.action = "falling")
+  );
+
+  obstacleSound.replayAsync();
+  Vibration.vibrate(500);
+
+  dispatch({ type: "lost-life" });
 };
 
 export default Obstacles;
