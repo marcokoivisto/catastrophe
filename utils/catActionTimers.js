@@ -1,6 +1,6 @@
 import _ from "underscore";
 
-const ROTATION_DURATION = 100;
+const ROTATION_DURATION = 66;
 const LANDING_DURATION = 200;
 const HURTING_DURATION = 300;
 

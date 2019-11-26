@@ -29,8 +29,8 @@ export default class App extends Component {
     this.gameEngine = null;
     this.entities = Level1();
 
-    backgroundSound.stopAsync();
-    levelSound.playAsync();
+    // backgroundSound.stopAsync();
+    // levelSound.playAsync();
   }
 
   handleEvent = e => {

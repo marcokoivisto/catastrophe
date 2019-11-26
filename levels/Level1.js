@@ -16,11 +16,11 @@ export default Level1 = () => {
 
   return {
     physics: { engine, world },
-    obstacle1: Obstacle(world, { x: 0, y: 100 }, 0.4, 150, "left"),
-    obstacle2: Obstacle(world, { x: 0, y: 400 }, 0.4, 200, "right"),
-    obstacle3: Obstacle(world, { x: 0, y: 700 }, 0.4, 250, "left"),
-    obstacle4: Obstacle(world, { x: 0, y: 1000 }, 0.4, 300, "right"),
-    obstacle5: Obstacle(world, { x: 0, y: 1300 }, 0.4, 150, "left"),
+    obstacle1: Obstacle(world, { x: 0, y: 100 }, Math.PI, 150, "left"),
+    obstacle2: Obstacle(world, { x: 0, y: 400 }, Math.PI, 200, "right"),
+    obstacle3: Obstacle(world, { x: 0, y: 700 }, Math.PI, 250, "left"),
+    obstacle4: Obstacle(world, { x: 0, y: 1000 }, Math.PI, 300, "right"),
+    obstacle5: Obstacle(world, { x: 0, y: 1300 }, Math.PI, 150, "left"),
     leftWall: Wall(
       world,
       { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },

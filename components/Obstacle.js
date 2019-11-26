@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View } from "react-native";
+import { Image } from "react-native";
 import Matter from "matter-js";
 import Constants from "../constants/Constants";
 
@@ -12,7 +12,9 @@ export class ObstacleRenderer extends PureComponent {
     const y = position.y - height / 2;
 
     return (
-      <View
+      <Image
+        resizeMode="repeat"
+        source={require("../assets/brick.png")}
         style={{
           position: "absolute",
           left: x,

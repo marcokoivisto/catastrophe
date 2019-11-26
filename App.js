@@ -18,7 +18,7 @@ export default class App extends Component {
 
   init = async () => {
     const { backgroundSound } = await loadSounds();
-    backgroundSound.playAsync();
+    // backgroundSound.playAsync();
   };
 
   render() {

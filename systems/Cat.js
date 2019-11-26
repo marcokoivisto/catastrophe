@@ -69,8 +69,10 @@ const handleMove = (cat, touch) => {
 
 const turnAround = cat => {
   startRotating(() => (cat.action = "rotating")).then(() =>
-    startLanding(() => (cat.action = "landing")).then(
-      () => (cat.action = "falling")
+    startLanding(() => (cat.action = "landing")).then(() =>
+      startRotating(() => (cat.action = "rotating")).then(
+        () => (cat.action = "falling")
+      )
     )
   );
 };

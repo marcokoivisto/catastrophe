@@ -24,8 +24,15 @@ const Obstacles = (entities, { dispatch }) => {
   const collisions = Matter.Query.collides(cat.body, bodies);
 
   if (collisions.length) {
-    cat.direction =
+    const side =
       cat.body.position.x > Constants.SCREEN_WIDTH / 2 ? "right" : "left";
+    cat.direction = side;
+
+    // Apply force
+    Matter.Body.applyForce(cat.body, cat.body.position, {
+      x: side === "right" ? -0.01 : 0.01,
+      y: -0.01
+    });
 
     if (cat.action !== "landing") hurtCat(cat, dispatch);
   }
