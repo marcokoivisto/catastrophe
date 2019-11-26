@@ -55,6 +55,8 @@ export const startHurting = cb => {
       HURTING_TIMER = setTimeout(() => {
         tn();
         resetHurting();
+        resetRotating();
+        resetLanding();
       }, HURTING_DURATION);
     }
   };

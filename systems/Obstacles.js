@@ -31,7 +31,7 @@ const Obstacles = (entities, { dispatch }) => {
     // Apply force
     Matter.Body.applyForce(cat.body, cat.body.position, {
       x: side === "right" ? -0.01 : 0.01,
-      y: -0.01
+      y: -0.1
     });
 
     if (cat.action !== "landing") hurtCat(cat, dispatch);
@@ -41,14 +41,12 @@ const Obstacles = (entities, { dispatch }) => {
 };
 
 const hurtCat = (cat, dispatch) => {
-  startHurting(() => (cat.action = "hurting")).then(
-    () => (cat.action = "falling")
-  );
+  startHurting(() => (cat.action = "hurting")).then(() => {
+    dispatch({ type: "game-over" });
+  });
 
   obstacleSound.replayAsync();
   Vibration.vibrate(500);
-
-  dispatch({ type: "lost-life" });
 };
 
 export default Obstacles;

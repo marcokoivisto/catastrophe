@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, StatusBar, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameEngine } from "react-native-game-engine";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
 // Utils
 import CameraRenderer from "../CameraRenderer";
@@ -23,7 +24,7 @@ export default class App extends Component {
     this.state = {
       running: true,
       score: 0,
-      lifes: 9
+      lives: 9
     };
 
     this.gameEngine = null;
@@ -36,8 +37,11 @@ export default class App extends Component {
   handleEvent = e => {
     switch (e.type) {
       case "game-over":
+        let { lives } = this.state;
+        lives = lives > 0 ? (lives -= 1) : 0;
         this.setState({
-          running: false
+          running: false,
+          lives
         });
         break;
       case "tuna-collected": {
@@ -45,14 +49,6 @@ export default class App extends Component {
         score += 1;
         this.setState({
           score
-        });
-        break;
-      }
-      case "lost-life": {
-        let { lifes } = this.state;
-        lifes -= 1;
-        this.setState({
-          lifes
         });
         break;
       }
@@ -69,7 +65,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { score, lifes } = this.state;
+    const { score, lives } = this.state;
     return (
       <>
         <Text
@@ -102,7 +98,7 @@ export default class App extends Component {
             textShadowRadius: 1
           }}
         >
-          LIFES x{lifes}
+          <Icon name="cat" size={28} color="#fff" solid /> x {lives}
         </Text>
         <LinearGradient
           style={styles.container}
@@ -126,7 +122,9 @@ export default class App extends Component {
           >
             <StatusBar hidden={true} />
           </GameEngine>
-          {!this.state.running && <GameOver onReset={this.reset} />}
+          {!this.state.running && (
+            <GameOver lives={lives} onReset={this.reset} />
+          )}
         </LinearGradient>
       </>
     );
