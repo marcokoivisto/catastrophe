@@ -19,7 +19,7 @@ class TunaRenderer extends Component {
           width,
           height,
           borderRadius: Constants.TUNA_SIZE.width / 2,
-          backgroundColor: "#dfaf37"
+          backgroundColor: "#ffd700"
         }}
       ></View>
     );

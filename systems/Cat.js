@@ -4,7 +4,7 @@ import { rotate } from "../utils";
 
 let lastPress = null;
 
-const Physics = (entities, { touches, time }) => {
+const Cat = (entities, { touches, time }) => {
   const engine = entities.physics.engine;
   const cat = entities.cat;
 
@@ -14,14 +14,14 @@ const Physics = (entities, { touches, time }) => {
     } else if (touch.type === "move") {
       HandleMove(cat, touch);
     }
-  })
+  });
 
   Matter.Engine.update(engine, time.delta);
 
   return entities;
 };
 
-const HandlePress = (cat) => {
+const HandlePress = cat => {
   const now = new Date().getTime();
   if (lastPress && now - lastPress < Constants.DOUBLE_PRESS_DELAY) {
     // Rotate physics model and visuals
@@ -31,17 +31,17 @@ const HandlePress = (cat) => {
   } else {
     lastPress = now;
   }
-}
+};
 
 const HandleMove = (cat, touch) => {
   // TODO Needs fine tuning
   const { pageX } = touch.event;
   const maxForce = 0.0015;
   const boostReducer = 0.00001;
-  const x = cat.body.position.x;         // Move based on cat position
+  const x = cat.body.position.x; // Move based on cat position
   // const x = Constants.SCREEN_WIDTH / 2;  // Move based on screen width
   let force = 0.00001;
-  
+
   // TODO Zero force if moving in opposite direction
   // Calculate force based on position of finger on screen
   if (pageX < x) {
@@ -57,6 +57,6 @@ const HandleMove = (cat, touch) => {
     x: force,
     y: 0
   });
-}
+};
 
-export default Physics;
+export default Cat;

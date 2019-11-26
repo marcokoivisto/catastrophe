@@ -8,8 +8,9 @@ export const rotate = (entity, radians) => {
 };
 
 export const remove = (id, entities) => {
-  if (entities[id].body)
+  if (entities[id].body) {
     Matter.Composite.remove(entities.physics.world, entities[id].body);
+  }
 
   delete entities[id];
 };

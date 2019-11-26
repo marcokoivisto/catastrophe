@@ -24,7 +24,8 @@ const Obstacles = (entities, { dispatch }) => {
   if (collisions.length) {
     obstacleSound.replayAsync();
     Vibration.vibrate(500);
-    dispatch({ type: "game-over" });
+    cat.direction = cat.direction === "left" ? "right" : "left";
+    dispatch({ type: "lost-life" });
   }
 
   return entities;
