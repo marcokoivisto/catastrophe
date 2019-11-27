@@ -41,30 +41,27 @@ const handlePress = cat => {
   }
 };
 
+// previous touch x position
+let previousTouch;
+
 const handleMove = (cat, touch) => {
-  // TODO Needs fine tuning
+  // Tcurrent touch x position
   const { pageX } = touch.event;
-  const maxForce = 0.0015;
+  if (previousTouch == null) previousTouch = pageX;
+
   const boostReducer = 0.00001;
-  const x = cat.body.position.x; // Move based on cat position
-  // const x = Constants.SCREEN_WIDTH / 2;  // Move based on screen width
-  let force = 0.00001;
-
-  // TODO Zero force if moving in opposite direction
-  // Calculate force based on position of finger on screen
-  if (pageX < x) {
-    force += (x / 2 - pageX) * boostReducer;
-    force = Math.max(-force, -maxForce);
-  } else {
-    force += (pageX - x / 2) * boostReducer;
-    force = Math.min(force, maxForce);
-  }
-
+  const BASE_FORCE = 0.005;
+  const distanceToCenter = Math.abs(pageX - Constants.SCREEN_WIDTH / 2);
+  let force = BASE_FORCE + distanceToCenter * boostReducer;
+  // get a force vector between the current and previous touch position
+  force = force * -Math.sign(previousTouch - pageX);
   // Apply force
   Matter.Body.applyForce(cat.body, cat.body.position, {
     x: force,
     y: 0
   });
+
+  previousTouch = pageX;
 };
 
 const turnAround = cat => {
