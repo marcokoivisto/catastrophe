@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { Image } from "react-native";
 import Matter from "matter-js";
 import Constants from "../constants/Constants";
 
@@ -11,17 +11,17 @@ class TunaRenderer extends Component {
     const y = body.position.y - height / 2;
 
     return (
-      <View
+      <Image
+        source={require("../assets/tuna.png")}
         style={{
           position: "absolute",
           left: x,
           top: y,
           width,
           height,
-          borderRadius: Constants.TUNA_SIZE.width / 2,
-          backgroundColor: "#ffd700"
+          borderRadius: Constants.TUNA_SIZE.width / 2
         }}
-      ></View>
+      />
     );
   }
 }
