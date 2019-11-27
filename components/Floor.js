@@ -23,7 +23,7 @@ export class FloorRenderer extends PureComponent {
           overflow: "hidden",
           flexDirection: "row"
         }}
-        source={require("../assets/brick.png")}
+        source={require("../assets/brick_grass.png")}
       />
     );
   }
@@ -34,11 +34,12 @@ export default (world, position, size) => {
     position.x,
     position.y,
     size.width,
-    size.height,
+    size.height - 40, // -40 Allows the cat to "bounce in the grass"
     {
       isStatic: true
     }
   );
+
   Matter.World.add(world, [body]);
 
   return {
