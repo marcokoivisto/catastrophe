@@ -24,8 +24,8 @@ const Button = props => {
     capitalize
   } = props;
 
-  const smallButtonHeight = isExtraSmallDevice ? 45 : 50;
-  const buttonHeight = isExtraSmallDevice ? 50 : 55;
+  const smallButtonHeight = isExtraSmallDevice ? 50 : 55;
+  const buttonHeight = isExtraSmallDevice ? 55 : 60;
 
   const styles = StyleSheet.create({
     button: {
@@ -36,10 +36,11 @@ const Button = props => {
       backgroundColor,
       borderRadius: 50,
       paddingLeft: isSmallDevice ? 20 : 25,
-      paddingRight: isSmallDevice ? 20 : 25
+      paddingRight: isSmallDevice ? 20 : 25,
+      minWidth: 250
     },
     buttonText: {
-      fontSize: small ? 14 : 16,
+      fontSize: small ? 28 : 32,
       fontWeight: fontWeight ? fontWeight : "700",
       color
     }
@@ -80,7 +81,11 @@ const Button = props => {
   return (
     <ButtonElement
       activeOpacity={0.7}
-      style={[buttonStyles, style, { opacity: disabled ? 0.5 : 1 }]}
+      style={[
+        buttonStyles,
+        style,
+        { opacity: disabled ? 0.5 : 1, alignItems: "center" }
+      ]}
       onPress={disabled ? null : onPress}
     >
       {iconName && (
@@ -98,7 +103,7 @@ Button.propTypes = {
   backgroundColor: PropTypes.string,
   block: PropTypes.bool,
   capitalize: PropTypes.bool,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   disabled: PropTypes.bool,
   filterButton: PropTypes.bool,
   flex: PropTypes.bool,
@@ -118,9 +123,10 @@ Button.propTypes = {
 Button.defaultProps = {
   fontWeight: null,
   filterButton: false,
-  backgroundColor: "transparent",
+  backgroundColor: "#e29dad",
+  color: "#2a1d20",
   iconType: "solid",
-  iconSize: 16,
+  iconSize: 24,
   flexGrow: true,
   maxWidth: false,
   flex: false,

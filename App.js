@@ -7,8 +7,9 @@ import { loadSounds } from "./utils/sound";
 // Screens
 import MainMenu from "./screens/MainMenu";
 import LevelMap from "./screens/LevelMap";
-import About from "./screens/About";
+import Store from "./screens/Store";
 import Play from "./screens/Play";
+import Settings from "./screens/Settings";
 
 export default class App extends Component {
   constructor(props) {
@@ -26,7 +27,8 @@ export default class App extends Component {
       <NativeRouter>
         <Route exact path="/" component={MainMenu} />
         <Route path="/levels" component={LevelMap} />
-        <Route path="/about" component={About} />
+        <Route path="/store" component={Store} />
+        <Route path="/settings" component={Settings} />
         <Route path="/play" component={Play} />
       </NativeRouter>
     );

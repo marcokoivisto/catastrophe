@@ -34,12 +34,11 @@ const LevelCompleted = props => {
           <Text style={styles.levelCompletedText}>Level Cleared!</Text>
           <Spacing />
           <Button
-            backgroundColor="#000"
-            color="#fff"
             flexGrow={false}
-            title="Back"
+            title="go back"
             onPress={gotoMainMenu}
             block
+            backgroundColor="#d4d5cf"
           />
         </View>
       </SafeAreaView>

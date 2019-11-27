@@ -1,40 +1,50 @@
 import React, { Component } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, View, Image } from "react-native";
 import { utilities } from "../constants/Layout";
 import Button from "../components/Button";
 import Spacing from "../components/Spacing";
 import { useHistory } from "react-router-native";
+import MenuBackground from "../components/MenuBackground";
 
 export default MainMenu = () => {
-  const { container, contentCenter, headline, textCenter } = utilities;
+  const { container, contentCenter } = utilities;
   const history = useHistory();
 
   return (
-    <View style={[container, contentCenter]}>
-      <SafeAreaView>
+    <MenuBackground>
+      <SafeAreaView style={[container, contentCenter]}>
+        <Image
+          resizeMode="contain"
+          style={{ height: 200 }}
+          source={require("../assets/levels/logo2x.png")}
+        />
         <View>
-          <Text style={[headline, textCenter]}>Catastrophe</Text>
-          <Spacing />
+          <Spacing height={40} />
           <Button
-            backgroundColor="#000"
-            color="#fff"
             flexGrow={false}
-            title="Play"
-            block
+            title="play"
             onPress={() => history.push("levels")}
           />
-          <Spacing height={15} />
+          <Spacing height={25} />
           <Button
-            backgroundColor="#000"
-            color="#fff"
             flexGrow={false}
-            title="About"
-            block
-            onPress={() => history.push("about")}
+            title="store"
+            onPress={() => history.push("store")}
           />
-          <Spacing height={15} />
+          <Spacing height={25} />
+          <Button
+            flexGrow={false}
+            title="settings"
+            onPress={() => history.push("settings")}
+          />
+          <Spacing height={60} />
         </View>
+        <Image
+          resizeMode="contain"
+          style={{ height: 60 }}
+          source={require("../assets/levels/points.png")}
+        />
       </SafeAreaView>
-    </View>
+    </MenuBackground>
   );
 };

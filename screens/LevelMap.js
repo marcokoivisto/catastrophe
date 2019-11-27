@@ -9,55 +9,50 @@ import { useHistory } from "react-router-native";
 import Level1 from "../levels/Level1";
 import Level2 from "../levels/Level2";
 import Level3 from "../levels/Level3";
+import MenuBackground from "../components/MenuBackground";
 
 export default LevelMap = () => {
   const { container, contentCenter, headline, textCenter } = utilities;
   const history = useHistory();
 
   return (
-    <View style={[container, contentCenter]}>
-      <SafeAreaView>
-        <View>
-          <Text style={[headline, textCenter]}>Levels</Text>
-          <Spacing />
-          <Button
-            backgroundColor="#000"
-            color="#fff"
-            flexGrow={false}
-            title="Level 1"
-            onPress={() => history.push("play", { level: Level1 })}
-            block
-          />
-          <Spacing />
-          <Button
-            backgroundColor="#000"
-            color="#fff"
-            flexGrow={false}
-            title="Level 2"
-            onPress={() => history.push("play", { level: Level2 })}
-            block
-          />
-          <Spacing />
-          <Button
-            backgroundColor="#000"
-            color="#fff"
-            flexGrow={false}
-            title="Level 3"
-            onPress={() => history.push("play", { level: Level3 })}
-            block
-          />
-          <Spacing />
-          <Button
-            backgroundColor="#000"
-            color="#fff"
-            flexGrow={false}
-            title="Back"
-            onPress={() => history.push("/")}
-            block
-            iconName="angle-left"
-          />
-        </View>
-      </SafeAreaView>
-    </View>
+    <MenuBackground>
+      <View style={[container, contentCenter]}>
+        <SafeAreaView>
+          <View>
+            <Text style={[headline, textCenter]}>Levels</Text>
+            <Spacing />
+            <Button
+              flexGrow={false}
+              title="Level 1"
+              onPress={() => history.push("play", { level: Level1 })}
+              block
+            />
+            <Spacing />
+            <Button
+              flexGrow={false}
+              title="Level 2"
+              onPress={() => history.push("play", { level: Level2 })}
+              block
+            />
+            <Spacing />
+            <Button
+              flexGrow={false}
+              title="Level 3"
+              onPress={() => history.push("play", { level: Level3 })}
+              block
+            />
+            <Spacing />
+            <Button
+              flexGrow={false}
+              title="go back"
+              onPress={() => history.push("/")}
+              block
+              backgroundColor="#d4d5cf"
+            />
+          </View>
+        </SafeAreaView>
+      </View>
+    </MenuBackground>
   );
 };
