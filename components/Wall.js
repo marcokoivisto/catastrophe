@@ -35,6 +35,7 @@ export default (world, position, size) => {
     size.width,
     size.height,
     {
+      restitution: 0,
       isStatic: true
     }
   );

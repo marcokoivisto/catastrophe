@@ -45,6 +45,12 @@ const completeLevel = (cat, dispatch) => {
   startSuccess(() => (cat.action = "success")).then(() => {
     dispatch({ type: "landed-successfully" });
   });
+  Matter.Body.setAngle(cat.body, Math.PI);
+  Matter.Body.setAngularVelocity(cat.body, 0);
+  Matter.Body.setVelocity(cat.body, {
+    x: 0,
+    y: 0
+  });
   // play level completed sound
 };
 
