@@ -3,7 +3,7 @@ import _ from "underscore";
 const ROTATION_DURATION = 66;
 const LANDING_DURATION = 200;
 const HURTING_DURATION = 300;
-const SUCCESS_DURATION = 300;
+const SUCCESS_DURATION = 900;
 const JUMPING_DURATION = 200;
 
 let ROTATING_TIMER = null;

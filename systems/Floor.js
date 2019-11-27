@@ -8,6 +8,10 @@ import { startHurting, startSuccess } from "../utils/catActionTimers";
 const Floor = (entities, { dispatch }) => {
   const cat = entities.cat;
 
+  if (cat.action === "success") {
+    return entities;
+  }
+
   const bodies = Object.keys(entities).reduce((bodies, key) => {
     if (entities[key].type === Constants.OBJECT_TYPE.FLOOR)
       bodies.push(entities[key].body);
@@ -41,7 +45,6 @@ const completeLevel = (cat, dispatch) => {
   startSuccess(() => (cat.action = "success")).then(() => {
     dispatch({ type: "landed-successfully" });
   });
-
   // play level completed sound
 };
 
