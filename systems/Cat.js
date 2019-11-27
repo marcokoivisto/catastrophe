@@ -7,6 +7,8 @@ import {
   startLanding
 } from "../utils/catActionTimers";
 
+const MAX_VERTICAL_VELOCITY = 20;
+
 let lastPress = null;
 
 const Cat = (entities, { touches, time }) => {
@@ -20,6 +22,14 @@ const Cat = (entities, { touches, time }) => {
       handleMove(cat, touch);
     }
   });
+
+  // Limit the maximum fall velocity
+  if (cat.body.velocity.y >= MAX_VERTICAL_VELOCITY) {
+    Matter.Body.setVelocity(cat.body, {
+      x: cat.body.velocity.x,
+      y: MAX_VERTICAL_VELOCITY
+    });
+  }
 
   Matter.Engine.update(engine, time.delta);
 
