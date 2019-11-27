@@ -8,12 +8,12 @@ import Button from "../components/Button";
 import { utilities } from "../constants/Layout";
 import { levelSound, backgroundSound } from "../utils/sound";
 
-const GameOver = props => {
+const LevelCompleted = props => {
   const { container, contentCenter, textCenter } = utilities;
   const { onReset } = props;
   const history = useHistory();
 
-  const quit = () => {
+  const gotoMainMenu = () => {
     onReset();
     levelSound.stopAsync();
     // backgroundSound.playAsync();
@@ -26,28 +26,19 @@ const GameOver = props => {
         <View>
           <Icon
             style={textCenter}
-            name="skull-crossbones"
+            name="thumbs-up"
             size={68}
             color="#fff"
             solid
           />
-          <Text style={styles.gameOverText}>Game Over</Text>
+          <Text style={styles.levelCompletedText}>Level Cleared!</Text>
           <Spacing />
           <Button
             backgroundColor="#000"
             color="#fff"
             flexGrow={false}
-            title="Retry"
-            onPress={onReset}
-            block
-          />
-          <Spacing height={15} />
-          <Button
-            backgroundColor="#000"
-            color="#fff"
-            flexGrow={false}
-            title="Quit"
-            onPress={quit}
+            title="Back"
+            onPress={gotoMainMenu}
             block
           />
         </View>
@@ -56,18 +47,18 @@ const GameOver = props => {
   );
 };
 
-GameOver.propTypes = {
+LevelCompleted.propTypes = {
   onReset: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
-  gameOverText: {
+  levelCompletedText: {
     marginTop: 20,
     color: "white",
     fontSize: 48,
     fontWeight: "bold"
   },
-  gameOverSubText: {
+  levelCompletedSubText: {
     color: "white",
     fontSize: 20,
     marginTop: 15
@@ -82,4 +73,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default GameOver;
+export default LevelCompleted;

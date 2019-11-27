@@ -13,6 +13,7 @@ import Systems from "../systems";
 
 // Menus
 import GameOver from "../menus/GameOver";
+import LevelCompleted from "../menus/LevelCompleted";
 
 // Levels
 import Level1 from "../levels/Level1";
@@ -23,8 +24,9 @@ export default class App extends Component {
 
     this.state = {
       running: true,
+      completed: false,
       score: 0,
-      lives: 9
+      lives: 9 // this cannot live here, it should be a prop
     };
 
     this.gameEngine = null;
@@ -36,6 +38,12 @@ export default class App extends Component {
 
   handleEvent = e => {
     switch (e.type) {
+      case "landed-successfully":
+        this.setState({
+          running: false,
+          completed: true
+        });
+        break;
       case "game-over":
         let { lives } = this.state;
         lives = lives > 0 ? (lives -= 1) : 0;
@@ -60,12 +68,13 @@ export default class App extends Component {
     this.gameEngine.swap(this.entities); // load new entities
     this.setState({
       score: 0,
-      running: true
+      running: true,
+      completed: false
     });
   };
 
   render() {
-    const { score, lives } = this.state;
+    const { score, lives, running, completed } = this.state;
     return (
       <>
         <Text
@@ -115,16 +124,15 @@ export default class App extends Component {
             ref={ref => (this.gameEngine = ref)}
             renderer={CameraRenderer}
             style={styles.gameContainer}
-            running={this.state.running}
+            running={running}
             onEvent={this.handleEvent}
             systems={Systems}
             entities={this.entities}
           >
             <StatusBar hidden={true} />
           </GameEngine>
-          {!this.state.running && (
-            <GameOver lives={lives} onReset={this.reset} />
-          )}
+          {!running && !completed && <GameOver onReset={this.reset} />}
+          {!running && completed && <LevelCompleted onReset={this.reset} />}
         </LinearGradient>
       </>
     );

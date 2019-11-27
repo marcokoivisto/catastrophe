@@ -7,6 +7,7 @@ import Constants from "../constants/Constants";
 import Obstacle from "../components/Obstacle";
 import Cat from "../components/Cat";
 import Wall from "../components/Wall";
+import Floor from "../components/Floor";
 import Clouds from "../components/Clouds";
 import Tuna from "../components/Tuna";
 
@@ -34,7 +35,7 @@ export default Level1 = () => {
       },
       { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 3 }
     ),
-    floor: Wall(
+    floor: Floor(
       world,
       {
         x: Constants.SCREEN_WIDTH / 2,

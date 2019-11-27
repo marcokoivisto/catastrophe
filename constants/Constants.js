@@ -15,12 +15,14 @@ const Constants = {
   OBJECT_TYPE: {
     OBSTACLE_KILL: 0,
     OBSTACLE_BOUNCE: 1,
-    TUNA: 2
+    TUNA: 2,
+    FLOOR: 3
   },
   DOUBLE_PRESS_DELAY: 200,
   COLLISIONS: {
     default: 0x0001,
-    tuna: 0x0010
+    tuna: 0x0010,
+    dead: 0x1111
   }
 };
 
