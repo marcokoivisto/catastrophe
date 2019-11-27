@@ -43,7 +43,6 @@ const completeLevel = (cat, dispatch) => {
   });
 
   // play level completed sound
-  Vibration.vibrate(500);
 };
 
 const hurtCat = (cat, dispatch) => {
