@@ -7,7 +7,7 @@ import CatHurting from "../assets/cat_hit.gif";
 import CatRotating from "../assets/clouds.png";
 import CatLanding from "../assets/cat_standing.gif";
 import CatJumping from "../assets/cat_jump.gif";
-import CatSuccess from "../assets/cat_attack.gif";
+import CatSuccess from "../assets/cat_standing.gif";
 
 import Constants from "../constants/Constants";
 

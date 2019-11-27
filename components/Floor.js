@@ -36,6 +36,7 @@ export default (world, position, size) => {
     size.width,
     size.height - 40, // -40 Allows the cat to "bounce in the grass"
     {
+      restitution: 0,
       isStatic: true
     }
   );
