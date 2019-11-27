@@ -11,12 +11,17 @@ import Floor from "../components/Floor";
 import Clouds from "../components/Clouds";
 import Tuna from "../components/Tuna";
 
-export default Level1 = () => {
+export default Level2 = () => {
   const engine = Matter.Engine.create({ enableSleeping: false });
   const world = engine.world;
 
   return {
     physics: { engine, world },
+    obstacle1: Obstacle(world, { x: 0, y: 100 }, Math.PI, 150, "left"),
+    obstacle2: Obstacle(world, { x: 0, y: 400 }, Math.PI, 200, "right"),
+    obstacle3: Obstacle(world, { x: 0, y: 700 }, Math.PI, 250, "left"),
+    obstacle4: Obstacle(world, { x: 0, y: 1000 }, Math.PI, 300, "right"),
+    obstacle5: Obstacle(world, { x: 0, y: 1300 }, Math.PI, 150, "left"),
     leftWall: Wall(
       world,
       { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },

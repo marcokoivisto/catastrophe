@@ -22,6 +22,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
+    const { level } = props.location.state;
+
     this.state = {
       running: true,
       completed: false,
@@ -30,7 +32,7 @@ export default class App extends Component {
     };
 
     this.gameEngine = null;
-    this.entities = Level1();
+    this.entities = level();
 
     // backgroundSound.stopAsync();
     // levelSound.playAsync();
@@ -64,7 +66,9 @@ export default class App extends Component {
   };
 
   reset = () => {
-    this.entities = Level1(); // rebuild entities
+    const { level } = this.props.location.state;
+
+    this.entities = level(); // rebuild entities
     this.gameEngine.swap(this.entities); // load new entities
     this.setState({
       score: 0,
