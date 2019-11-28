@@ -73,7 +73,7 @@ const handleMove = (cat, touch) => {
   const distanceToCenter = Math.abs(pageX - Constants.SCREEN_WIDTH / 2);
   let force = BASE_FORCE + distanceToCenter * boostReducer;
   // get a force vector between the current and previous touch position
-  force = force * -Math.sign(previousTouch - pageX);
+  force *= -Math.sign(previousTouch - pageX);
   // Apply force
   Matter.Body.applyForce(cat.body, cat.body.position, {
     x: force,
