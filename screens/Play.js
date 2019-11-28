@@ -28,8 +28,7 @@ export default class App extends Component {
     this.state = {
       running: true,
       completed: false,
-      score: 0,
-      lives: 9 // this cannot live here, it should be a prop
+      score: 0
     };
 
     this.gameEngine = null;
@@ -48,12 +47,11 @@ export default class App extends Component {
         });
         break;
       case "game-over":
-        let { lives } = this.state;
-        lives = lives > 0 ? (lives -= 1) : 0;
         this.setState({
           running: false,
-          lives
+          completed: false
         });
+        this.props.lostLife();
         break;
       case "tuna-collected": {
         let { score } = this.state;
@@ -79,7 +77,8 @@ export default class App extends Component {
   };
 
   render() {
-    const { score, lives, running, completed } = this.state;
+    const { score, running, completed } = this.state;
+    const { lives } = this.props;
     return (
       <>
         <View
