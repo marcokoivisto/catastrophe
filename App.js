@@ -11,13 +11,15 @@ import Store from "./screens/Store";
 import Play from "./screens/Play";
 import Settings from "./screens/Settings";
 
+import Levels from "./levels";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       lives: 9,
-      currentLevel: null
+      level: Levels[0]
     };
 
     this.init();
@@ -37,18 +39,33 @@ export default class App extends Component {
     });
   };
 
+  setLevel = levelId => {
+    this.setState({
+      level: Levels[levelId]
+    });
+  };
+
   render() {
-    const { lives } = this.state;
+    const { level, lives } = this.state;
     return (
       <NativeRouter>
         <Route exact path="/" component={MainMenu} />
-        <Route path="/levels" component={LevelMap} />
+        <Route
+          path="/levels"
+          render={props => <LevelMap {...props} setLevel={this.setLevel} />}
+        />
         <Route path="/store" component={Store} />
         <Route path="/settings" component={Settings} />
         <Route
           path="/play"
           render={props => (
-            <Play {...props} lives={lives} lostLife={this.lostLife} />
+            <Play
+              {...props}
+              lives={lives}
+              lostLife={this.lostLife}
+              level={level}
+              setLevel={this.setLevel}
+            />
           )}
         />
       </NativeRouter>

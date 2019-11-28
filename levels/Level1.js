@@ -16,6 +16,8 @@ export default Level1 = () => {
   const world = engine.world;
 
   return {
+    LEVEL_ID: 0,
+    NEXT_LEVEL_ID: 1,
     physics: { engine, world },
     leftWall: Wall(
       world,

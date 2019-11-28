@@ -16,6 +16,8 @@ export default Level3 = () => {
   const world = engine.world;
 
   return {
+    LEVEL_ID: 2,
+    NEXT_LEVEL_ID: 0,
     physics: { engine, world },
     obstacle1: Obstacle(world, { x: 0, y: 100 }, Math.PI, 150, "left"),
     obstacle2: Obstacle(world, { x: 0, y: 400 }, Math.PI, 300, "right"),

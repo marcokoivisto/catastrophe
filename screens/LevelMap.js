@@ -5,15 +5,17 @@ import Button from "../components/Button";
 import Spacing from "../components/Spacing";
 import { useHistory } from "react-router-native";
 
-// Levels
-import Level1 from "../levels/Level1";
-import Level2 from "../levels/Level2";
-import Level3 from "../levels/Level3";
 import MenuBackground from "../components/MenuBackground";
 
-export default LevelMap = () => {
+export default LevelMap = props => {
   const { container, contentCenter, headline, textCenter } = utilities;
+  const { setLevel } = props;
   const history = useHistory();
+
+  const handleSelectLevel = levelId => {
+    setLevel(levelId);
+    history.push("play");
+  };
 
   return (
     <MenuBackground>
@@ -25,21 +27,21 @@ export default LevelMap = () => {
             <Button
               flexGrow={false}
               title="Level 1"
-              onPress={() => history.push("play", { level: Level1 })}
+              onPress={() => handleSelectLevel(0)}
               block
             />
             <Spacing />
             <Button
               flexGrow={false}
               title="Level 2"
-              onPress={() => history.push("play", { level: Level2 })}
+              onPress={() => handleSelectLevel(1)}
               block
             />
             <Spacing />
             <Button
               flexGrow={false}
               title="Level 3"
-              onPress={() => history.push("play", { level: Level3 })}
+              onPress={() => handleSelectLevel(2)}
               block
             />
             <Spacing />

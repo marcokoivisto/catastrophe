@@ -23,7 +23,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    const { level } = props.location.state;
+    const { level } = props;
 
     this.state = {
       running: true,
@@ -36,6 +36,13 @@ export default class App extends Component {
 
     // backgroundSound.stopAsync();
     // levelSound.playAsync();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.level) {
+      this.entities = nextProps.level(); // rebuild entities
+      this.gameEngine.swap(this.entities); // load new entities
+    }
   }
 
   handleEvent = e => {
@@ -64,11 +71,14 @@ export default class App extends Component {
     }
   };
 
-  reset = () => {
-    const { level } = this.props.location.state;
+  reset = (forceSwap = false) => {
+    if (forceSwap) {
+      const { level } = this.props;
 
-    this.entities = level(); // rebuild entities
-    this.gameEngine.swap(this.entities); // load new entities
+      this.entities = level(); // rebuild entities
+      this.gameEngine.swap(this.entities); // load new entities
+    }
+
     this.setState({
       score: 0,
       running: true,
@@ -78,7 +88,7 @@ export default class App extends Component {
 
   render() {
     const { score, running, completed } = this.state;
-    const { lives } = this.props;
+    const { lives, setLevel } = this.props;
     return (
       <>
         <View
@@ -122,7 +132,12 @@ export default class App extends Component {
             <GameOver onReset={this.reset} score={score} maxScore={10} />
           )}
           {!running && completed && (
-            <LevelCompleted onReset={this.reset} score={score} maxScore={10} />
+            <LevelCompleted
+              onReset={this.reset}
+              score={score}
+              maxScore={10}
+              onGoToNextLevel={() => setLevel(this.entities.NEXT_LEVEL_ID)}
+            />
           )}
         </LinearGradient>
       </>

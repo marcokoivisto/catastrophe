@@ -11,17 +11,17 @@ import Score from "../components/Score";
 
 const LevelCompleted = props => {
   const { container, contentCenter } = utilities;
-  const { onReset, score, maxScore } = props;
+  const { onReset, score, maxScore, onGoToNextLevel } = props;
   const history = useHistory();
 
   const goToNextLevel = () => {
+    onGoToNextLevel();
     onReset();
     levelSound.stopAsync();
-    history.push("/levels");
   };
 
   const quit = () => {
-    onReset();
+    onReset(true);
     levelSound.stopAsync();
     // backgroundSound.playAsync();
     history.push("/levels");

@@ -14,19 +14,19 @@ const Lives = props => {
         flexDirection: "row"
       }}
     >
+      <Image
+        resizeMode="contain"
+        style={{ width: small ? 45 : 50 }}
+        source={require("../assets/levels/lives2x.png")}
+      />
       <Text
         style={[
           small ? headline3 : headline,
           { color: "#222162", fontWeight: "900" }
         ]}
       >
-        {lives}
+        x {lives}
       </Text>
-      <Image
-        resizeMode="contain"
-        style={{ width: small ? 45 : 50, marginLeft: 15 }}
-        source={require("../assets/levels/lives2x.png")}
-      />
     </View>
   );
 };
