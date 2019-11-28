@@ -3,7 +3,7 @@ import Constants from "../constants/Constants";
 import { Vibration } from "react-native";
 import { obstacleSound } from "../utils/sound";
 
-import { startHurting, startSuccess } from "../utils/catActionTimers";
+import { startHurting, startFinalLanding } from "../utils/catActionTimers";
 
 const Floor = (entities, { dispatch }) => {
   const cat = entities.cat;
@@ -42,7 +42,7 @@ const Floor = (entities, { dispatch }) => {
 };
 
 const completeLevel = (cat, dispatch) => {
-  startSuccess(() => (cat.action = "success")).then(() => {
+  startFinalLanding(() => (cat.action = "success")).then(() => {
     dispatch({ type: "landed-successfully" });
   });
   Matter.Body.setAngle(cat.body, Math.PI);
