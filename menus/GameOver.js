@@ -15,7 +15,7 @@ const GameOver = props => {
   const history = useHistory();
 
   const quit = () => {
-    onReset();
+    onReset(true);
     levelSound.stopAsync();
     // backgroundSound.playAsync();
     history.push("/levels");

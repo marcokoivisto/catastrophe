@@ -39,9 +39,10 @@ export default class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.level) {
+    if (nextProps.level && nextProps.level !== this.props.level) {
       this.entities = nextProps.level(); // rebuild entities
       this.gameEngine.swap(this.entities); // load new entities
+      console.log("game reloaded", nextProps);
     }
   }
 
