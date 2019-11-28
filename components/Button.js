@@ -41,7 +41,7 @@ const Button = props => {
     },
     buttonText: {
       fontSize: small ? 28 : 32,
-      fontWeight: fontWeight ? fontWeight : "700",
+      fontWeight: fontWeight ? fontWeight : "bold",
       color
     }
   });

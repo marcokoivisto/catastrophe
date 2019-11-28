@@ -4,6 +4,7 @@ const backgroundSound = new Audio.Sound();
 const levelSound = new Audio.Sound();
 const tunaSound = new Audio.Sound();
 const obstacleSound = new Audio.Sound();
+const meowSound = new Audio.Sound();
 
 const loadSounds = async () => {
   await loadSound(
@@ -13,6 +14,7 @@ const loadSounds = async () => {
   );
   await loadSound(levelSound, require("../assets/sounds/level.mp3"), true);
   await loadSound(tunaSound, require("../assets/sounds/meow.mp3"), false);
+  await loadSound(meowSound, require("../assets/sounds/meow.mp3"), false);
   await loadSound(
     obstacleSound,
     require("../assets/sounds/obstacle.mp3"),
@@ -31,4 +33,11 @@ const loadSound = async (player, file, shouldLoop) => {
   }
 };
 
-export { loadSounds, backgroundSound, levelSound, tunaSound, obstacleSound };
+export {
+  loadSounds,
+  backgroundSound,
+  levelSound,
+  tunaSound,
+  obstacleSound,
+  meowSound
+};

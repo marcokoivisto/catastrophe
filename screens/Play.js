@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, StatusBar, Text } from "react-native";
+import { StyleSheet, StatusBar, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameEngine } from "react-native-game-engine";
 import Icon from "@expo/vector-icons/FontAwesome5";
@@ -16,7 +16,8 @@ import GameOver from "../menus/GameOver";
 import LevelCompleted from "../menus/LevelCompleted";
 
 // Levels
-import Level1 from "../levels/Level1";
+import Score from "../components/Score";
+import Lives from "../components/Lives";
 
 export default class App extends Component {
   constructor(props) {
@@ -81,38 +82,21 @@ export default class App extends Component {
     const { score, lives, running, completed } = this.state;
     return (
       <>
-        <Text
+        <View
           style={{
             position: "absolute",
-            right: 40,
-            top: 30,
+            top: -10,
             zIndex: 1,
-            fontSize: 24,
-            fontWeight: "900",
-            color: "#fff",
-            textShadowColor: "#333",
-            textShadowOffset: { width: -1, height: 1 },
-            textShadowRadius: 1
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%",
+            paddingLeft: 45,
+            paddingRight: 45
           }}
         >
-          SCORE {score}
-        </Text>
-        <Text
-          style={{
-            position: "absolute",
-            left: 40,
-            top: 30,
-            zIndex: 1,
-            fontSize: 24,
-            fontWeight: "900",
-            color: "#fff",
-            textShadowColor: "#333",
-            textShadowOffset: { width: -1, height: 1 },
-            textShadowRadius: 1
-          }}
-        >
-          <Icon name="cat" size={28} color="#fff" solid /> x {lives}
-        </Text>
+          <Lives small lives={lives} />
+          {running && <Score small score={score} maxScore={10} />}
+        </View>
         <LinearGradient
           style={styles.container}
           colors={[
@@ -135,8 +119,12 @@ export default class App extends Component {
           >
             <StatusBar hidden={true} />
           </GameEngine>
-          {!running && !completed && <GameOver onReset={this.reset} />}
-          {!running && completed && <LevelCompleted onReset={this.reset} />}
+          {!running && !completed && (
+            <GameOver onReset={this.reset} score={score} maxScore={10} />
+          )}
+          {!running && completed && (
+            <LevelCompleted onReset={this.reset} score={score} maxScore={10} />
+          )}
         </LinearGradient>
       </>
     );

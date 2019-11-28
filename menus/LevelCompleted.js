@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, SafeAreaView } from "react-native";
+import { StyleSheet, View, Text, SafeAreaView, Image } from "react-native";
 import { useHistory } from "react-router-native";
 import PropTypes from "prop-types";
 import Icon from "@expo/vector-icons/FontAwesome5";
@@ -7,13 +7,20 @@ import Spacing from "../components/Spacing";
 import Button from "../components/Button";
 import { utilities } from "../constants/Layout";
 import { levelSound, backgroundSound } from "../utils/sound";
+import Score from "../components/Score";
 
 const LevelCompleted = props => {
-  const { container, contentCenter, textCenter } = utilities;
-  const { onReset } = props;
+  const { container, contentCenter } = utilities;
+  const { onReset, score, maxScore } = props;
   const history = useHistory();
 
-  const gotoMainMenu = () => {
+  const goToNextLevel = () => {
+    onReset();
+    levelSound.stopAsync();
+    history.push("/levels");
+  };
+
+  const quit = () => {
     onReset();
     levelSound.stopAsync();
     // backgroundSound.playAsync();
@@ -21,28 +28,39 @@ const LevelCompleted = props => {
   };
 
   return (
-    <View style={[styles.fullScreen, container, contentCenter]}>
-      <SafeAreaView>
-        <View>
-          <Icon
-            style={textCenter}
-            name="thumbs-up"
-            size={68}
-            color="#fff"
-            solid
-          />
-          <Text style={styles.levelCompletedText}>Level Cleared!</Text>
-          <Spacing />
+    <MenuBackground>
+      <SafeAreaView style={[container, contentCenter]}>
+        <Image
+          resizeMode="contain"
+          style={{ height: 240 }}
+          source={require("../assets/levels/you_win_cat2x.png")}
+        />
+        <Text
+          style={{
+            fontSize: 52,
+            fontWeight: "bold",
+            color: "#222162",
+            marginTop: -10
+          }}
+        >
+          you win!
+        </Text>
+        <View style={{ alignItems: "center" }}>
+          <Spacing height={20} />
+          <Score score={score} maxScore={maxScore} />
+          <Spacing height={20} />
+          <Button flexGrow={false} title="next" onPress={goToNextLevel} block />
+          <Spacing height={15} />
           <Button
             flexGrow={false}
-            title="go back"
-            onPress={gotoMainMenu}
+            title="exit to map"
+            onPress={quit}
             block
             backgroundColor="#d4d5cf"
           />
         </View>
       </SafeAreaView>
-    </View>
+    </MenuBackground>
   );
 };
 

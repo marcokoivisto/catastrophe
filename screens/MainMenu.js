@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { SafeAreaView, View, Image } from "react-native";
+import { SafeAreaView, View, Image, TouchableOpacity } from "react-native";
 import { utilities } from "../constants/Layout";
 import Button from "../components/Button";
 import Spacing from "../components/Spacing";
 import { useHistory } from "react-router-native";
 import MenuBackground from "../components/MenuBackground";
+import { meowSound } from "../utils/sound";
 
 export default MainMenu = () => {
   const { container, contentCenter } = utilities;
@@ -39,11 +40,16 @@ export default MainMenu = () => {
           />
           <Spacing height={60} />
         </View>
-        <Image
-          resizeMode="contain"
-          style={{ height: 60 }}
-          source={require("../assets/levels/points.png")}
-        />
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={async () => meowSound.replayAsync()}
+        >
+          <Image
+            resizeMode="contain"
+            style={{ height: 60 }}
+            source={require("../assets/levels/points.png")}
+          />
+        </TouchableOpacity>
       </SafeAreaView>
     </MenuBackground>
   );
