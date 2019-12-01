@@ -8,7 +8,7 @@ import { useHistory } from "react-router-native";
 import MenuBackground from "../components/MenuBackground";
 
 export default LevelMap = props => {
-  const DEBUG = false;
+  const DEBUG = true;
   const { container, contentCenter, headline, textCenter } = utilities;
   const { setLevel } = props;
   const history = useHistory();
@@ -50,6 +50,13 @@ export default LevelMap = props => {
               flexGrow={false}
               title="Level 3"
               onPress={() => handleSelectLevel(2)}
+              block
+            />
+            <Spacing />
+            <Button
+              flexGrow={false}
+              title="Level 4"
+              onPress={() => handleSelectLevel(3)}
               block
             />
             <Spacing />

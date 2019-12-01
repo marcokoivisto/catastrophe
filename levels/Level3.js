@@ -17,7 +17,7 @@ export default Level3 = () => {
 
   return {
     LEVEL_ID: 2,
-    NEXT_LEVEL_ID: 0,
+    NEXT_LEVEL_ID: 3,
     physics: { engine, world },
     obstacle1: Obstacle(world, { x: 0, y: 200 }, Math.PI, 150, "left"),
     obstacle2: Obstacle(world, { x: 0, y: 280 }, Math.PI, 250, "right"),
