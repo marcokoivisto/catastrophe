@@ -19,11 +19,12 @@ export default Level3 = () => {
     LEVEL_ID: 2,
     NEXT_LEVEL_ID: 0,
     physics: { engine, world },
-    obstacle1: Obstacle(world, { x: 0, y: 100 }, Math.PI, 150, "left"),
-    obstacle2: Obstacle(world, { x: 0, y: 400 }, Math.PI, 300, "right"),
-    obstacle3: Obstacle(world, { x: 0, y: 700 }, Math.PI, 250, "left"),
-    obstacle4: Obstacle(world, { x: 0, y: 1000 }, Math.PI, 450, "right"),
-    obstacle5: Obstacle(world, { x: 0, y: 1300 }, Math.PI, 250, "left"),
+    obstacle1: Obstacle(world, { x: 0, y: 200 }, Math.PI, 150, "left"),
+    obstacle2: Obstacle(world, { x: 0, y: 280 }, Math.PI, 250, "right"),
+    obstacle3: Obstacle(world, { x: 0, y: 450 }, Math.PI, 350, "left"),
+    obstacle4: Obstacle(world, { x: 0, y: 700 }, Math.PI, 170, "left"),
+    obstacle5: Obstacle(world, { x: 0, y: 700 }, Math.PI, 220, "right"),
+    obstacle6: Obstacle(world, { x: 0, y: 1000 }, Math.PI, 400, "right"),
     leftWall: Wall(
       world,
       { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },
@@ -52,44 +53,44 @@ export default Level3 = () => {
       Constants.CAT_SIZE
     ),
     tuna1: Tuna(world, {
-      x: 100,
-      y: 100
+      x: 140,
+      y: 150
     }),
     tuna2: Tuna(world, {
-      x: 120,
-      y: 200
+      x: 150,
+      y: 270
     }),
     tuna3: Tuna(world, {
-      x: 130,
-      y: 300
+      x: 250,
+      y: 450
     }),
     tuna4: Tuna(world, {
-      x: 150,
-      y: 400
+      x: 250,
+      y: 550
     }),
     tuna5: Tuna(world, {
-      x: 180,
+      x: 150,
       y: 700
     }),
     tuna6: Tuna(world, {
-      x: 200,
-      y: 800
+      x: 150,
+      y: 850
     }),
     tuna7: Tuna(world, {
-      x: 200,
-      y: 1000
-    }),
-    tuna8: Tuna(world, {
-      x: 200,
-      y: 1000
+      x: 100,
+      y: 950
     }),
     tuna9: Tuna(world, {
-      x: 200,
-      y: 1000
+      x: 120,
+      y: 1050
+    }),
+    tuna9: Tuna(world, {
+      x: 150,
+      y: 1100
     }),
     tuna10: Tuna(world, {
-      x: 200,
-      y: 1000
+      x: 190,
+      y: 1150
     }),
     camera: { offsetY: 0 }
   };

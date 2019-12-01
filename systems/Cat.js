@@ -69,7 +69,7 @@ const handleMove = (cat, touch) => {
   if (previousTouch == null) previousTouch = pageX;
 
   const boostReducer = 0.00001;
-  const BASE_FORCE = 0.005;
+  const BASE_FORCE = 0.003;
   const distanceToCenter = Math.abs(pageX - Constants.SCREEN_WIDTH / 2);
   let force = BASE_FORCE + distanceToCenter * boostReducer;
   // get a force vector between the current and previous touch position
