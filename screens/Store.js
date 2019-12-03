@@ -14,7 +14,7 @@ export default Store = () => {
       <SafeAreaView>
         <View>
           <Text style={[headline, textCenter]}>Store</Text>
-          <Spacing height={30} />
+          <Spacing height={60} />
           <Button
             flexGrow={false}
             title="go back"

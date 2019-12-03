@@ -56,7 +56,7 @@ export default LevelMap = props => {
             onPress={() => handleSelectLevel(3)}
             block
           />
-          <Spacing />
+          <Spacing height={60} />
           <Button
             flexGrow={false}
             title="go back"

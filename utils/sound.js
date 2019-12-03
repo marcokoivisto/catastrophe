@@ -6,6 +6,13 @@ const tunaSound = new Audio.Sound();
 const obstacleSound = new Audio.Sound();
 const meowSound = new Audio.Sound();
 
+const toggleSounds = async isMuted => {
+  backgroundSound.setIsMutedAsync(isMuted);
+  levelSound.setIsMutedAsync(isMuted);
+  tunaSound.setIsMutedAsync(isMuted);
+  obstacleSound.setIsMutedAsync(isMuted);
+};
+
 const loadSounds = async () => {
   await loadSound(
     backgroundSound,
@@ -39,5 +46,6 @@ export {
   levelSound,
   tunaSound,
   obstacleSound,
-  meowSound
+  meowSound,
+  toggleSounds
 };

@@ -3,7 +3,7 @@ import { NativeRouter, Route } from "react-router-native";
 import { ImageBackground } from "react-native";
 
 // Utils
-import { loadSounds } from "./utils/sound";
+import { loadSounds, toggleSounds } from "./utils/sound";
 
 // Screens
 import MainMenu from "./screens/MainMenu";
@@ -13,6 +13,7 @@ import Play from "./screens/Play";
 import Settings from "./screens/Settings";
 
 import Levels from "./levels";
+import storage from "./utils/storage";
 
 export default class App extends Component {
   constructor(props) {
@@ -28,7 +29,9 @@ export default class App extends Component {
 
   init = async () => {
     const { backgroundSound } = await loadSounds();
-    // backgroundSound.playAsync();
+    const isMuted = await storage.get("is_muted");
+    backgroundSound.playAsync();
+    toggleSounds(isMuted);
   };
 
   lostLife = () => {
