@@ -94,13 +94,13 @@ export default class App extends Component {
         <View
           style={{
             position: "absolute",
-            top: -10,
+            top: 50,
             zIndex: 1,
             flexDirection: "row",
             justifyContent: "space-between",
             width: "100%",
-            paddingLeft: 45,
-            paddingRight: 45
+            paddingLeft: 40,
+            paddingRight: 40
           }}
         >
           <Lives small lives={lives} />

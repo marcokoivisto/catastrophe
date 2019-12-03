@@ -12,7 +12,11 @@ const Score = props => {
       style={{
         alignItems: "center",
         flexDirection: "row",
-        marginLeft: small ? 0 : -15
+        marginLeft: small ? 0 : -15,
+        backgroundColor: "rgba(255, 254, 247, 0.7)",
+        maxHeight: 50,
+        paddingHorizontal: 15,
+        borderRadius: 25
       }}
     >
       <Text
