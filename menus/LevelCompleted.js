@@ -59,7 +59,7 @@ const LevelCompleted = props => {
         <Spacing height={15} />
         <Button
           flexGrow={false}
-          title="exit"
+          title="exit to levels"
           onPress={quit}
           block
           backgroundColor="#d4d5cf"
