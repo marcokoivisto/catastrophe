@@ -28,39 +28,44 @@ const LevelCompleted = props => {
   };
 
   return (
-    <MenuBackground>
-      <SafeAreaView style={[container, contentCenter]}>
-        <Image
-          resizeMode="contain"
-          style={{ height: 240 }}
-          source={require("../assets/levels/you_win_cat2x.png")}
+    <SafeAreaView
+      style={[container, contentCenter, { backgroundColor: "#fffef7" }]}
+    >
+      <Image
+        resizeMode="contain"
+        style={{ height: 240 }}
+        source={require("../assets/levels/you_win_cat2x.png")}
+      />
+      <Text
+        style={{
+          fontSize: 52,
+          fontWeight: "bold",
+          color: "#222162",
+          marginTop: -10
+        }}
+      >
+        you win!
+      </Text>
+      <View style={{ alignItems: "center" }}>
+        <Spacing height={20} />
+        <Score score={score} maxScore={maxScore} />
+        <Spacing height={20} />
+        <Button
+          flexGrow={false}
+          title="next level"
+          onPress={goToNextLevel}
+          block
         />
-        <Text
-          style={{
-            fontSize: 52,
-            fontWeight: "bold",
-            color: "#222162",
-            marginTop: -10
-          }}
-        >
-          you win!
-        </Text>
-        <View style={{ alignItems: "center" }}>
-          <Spacing height={20} />
-          <Score score={score} maxScore={maxScore} />
-          <Spacing height={20} />
-          <Button flexGrow={false} title="next" onPress={goToNextLevel} block />
-          <Spacing height={15} />
-          <Button
-            flexGrow={false}
-            title="exit to map"
-            onPress={quit}
-            block
-            backgroundColor="#d4d5cf"
-          />
-        </View>
-      </SafeAreaView>
-    </MenuBackground>
+        <Spacing height={15} />
+        <Button
+          flexGrow={false}
+          title="exit"
+          onPress={quit}
+          block
+          backgroundColor="#d4d5cf"
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

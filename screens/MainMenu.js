@@ -4,7 +4,6 @@ import { utilities } from "../constants/Layout";
 import Button from "../components/Button";
 import Spacing from "../components/Spacing";
 import { useHistory } from "react-router-native";
-import MenuBackground from "../components/MenuBackground";
 import { meowSound } from "../utils/sound";
 
 export default MainMenu = () => {
@@ -12,45 +11,43 @@ export default MainMenu = () => {
   const history = useHistory();
 
   return (
-    <MenuBackground>
-      <SafeAreaView style={[container, contentCenter]}>
+    <SafeAreaView style={[container, contentCenter]}>
+      <Image
+        resizeMode="contain"
+        style={{ height: 200 }}
+        source={require("../assets/levels/logo2x.png")}
+      />
+      <View>
+        <Spacing height={40} />
+        <Button
+          flexGrow={false}
+          title="play"
+          onPress={() => history.push("levels")}
+        />
+        <Spacing height={25} />
+        <Button
+          flexGrow={false}
+          title="store"
+          onPress={() => history.push("store")}
+        />
+        <Spacing height={25} />
+        <Button
+          flexGrow={false}
+          title="settings"
+          onPress={() => history.push("settings")}
+        />
+        <Spacing height={60} />
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={async () => meowSound.replayAsync()}
+      >
         <Image
           resizeMode="contain"
-          style={{ height: 200 }}
-          source={require("../assets/levels/logo2x.png")}
+          style={{ height: 60 }}
+          source={require("../assets/levels/points.png")}
         />
-        <View>
-          <Spacing height={40} />
-          <Button
-            flexGrow={false}
-            title="play"
-            onPress={() => history.push("levels")}
-          />
-          <Spacing height={25} />
-          <Button
-            flexGrow={false}
-            title="store"
-            onPress={() => history.push("store")}
-          />
-          <Spacing height={25} />
-          <Button
-            flexGrow={false}
-            title="settings"
-            onPress={() => history.push("settings")}
-          />
-          <Spacing height={60} />
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={async () => meowSound.replayAsync()}
-        >
-          <Image
-            resizeMode="contain"
-            style={{ height: 60 }}
-            source={require("../assets/levels/points.png")}
-          />
-        </TouchableOpacity>
-      </SafeAreaView>
-    </MenuBackground>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
