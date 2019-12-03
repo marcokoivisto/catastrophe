@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import React from "react";
+import { ImageBackground, SafeAreaView } from "react-native";
 import { utilities } from "../constants/Layout";
 import Button from "../components/Button";
-import Spacing from "../components/Spacing";
+import LevelButton from "../components/LevelButton";
 import { useHistory } from "react-router-native";
 
 export default LevelMap = props => {
   const DEBUG = true;
-  const { container, contentCenter, headline, textCenter } = utilities;
+  const { container, contentCenter } = utilities;
   const { onSetLevel } = props;
   const history = useHistory();
 
@@ -17,55 +17,48 @@ export default LevelMap = props => {
   };
 
   return (
-    <View style={[container, contentCenter]}>
-      <SafeAreaView>
-        <View>
-          {DEBUG && <Spacing /> && (
-            <Button
-              flexGrow={false}
-              title="Debug"
-              onPress={() => handleSelectLevel(999)}
-              block
-            />
-          )}
-          <Spacing />
-          <Button
-            flexGrow={false}
-            title="Level 1"
-            onPress={() => handleSelectLevel(0)}
-            block
-          />
-          <Spacing />
-          <Button
-            flexGrow={false}
-            title="Level 2"
-            onPress={() => handleSelectLevel(1)}
-            block
-          />
-          <Spacing />
-          <Button
-            flexGrow={false}
-            title="Level 3"
-            onPress={() => handleSelectLevel(2)}
-            block
-          />
-          <Spacing />
-          <Button
-            flexGrow={false}
-            title="Level 4"
-            onPress={() => handleSelectLevel(3)}
-            block
-          />
-          <Spacing height={60} />
-          <Button
-            flexGrow={false}
-            title="go back"
-            onPress={() => history.push("/")}
-            block
-            backgroundColor="#d4d5cf"
-          />
-        </View>
-      </SafeAreaView>
-    </View>
+    <ImageBackground
+      style={[
+        container,
+        contentCenter,
+        { width: "100%", height: "100%", backgroundColor: "#fffef7" }
+      ]}
+      imageStyle={{ resizeMode: "cover" }}
+      source={require("../assets/levels/map.png")}
+    >
+      {DEBUG && (
+        <LevelButton
+          title="D"
+          onPress={() => handleSelectLevel(999)}
+          style={{ position: "absolute", top: "9%", left: "10%" }}
+        />
+      )}
+      <LevelButton
+        title="1"
+        onPress={() => handleSelectLevel(0)}
+        style={{ position: "absolute", top: "15%", right: "24%" }}
+      />
+      <LevelButton
+        title="2"
+        onPress={() => handleSelectLevel(1)}
+        style={{ position: "absolute", top: "35%", right: "3%" }}
+      />
+      <LevelButton
+        title="3"
+        onPress={() => handleSelectLevel(2)}
+        style={{ position: "absolute", top: "50%", left: "30%" }}
+      />
+      <LevelButton
+        title="4"
+        onPress={() => handleSelectLevel(3)}
+        style={{ position: "absolute", top: "72%", left: "20%" }}
+      />
+      <Button
+        title="go back"
+        backgroundColor="#d4d5cf"
+        onPress={() => history.push("/")}
+        style={{ position: "absolute", bottom: 60 }}
+      />
+    </ImageBackground>
   );
 };

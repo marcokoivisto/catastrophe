@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View, Text, SafeAreaView, Image } from "react-native";
 import { useHistory } from "react-router-native";
 import PropTypes from "prop-types";
-import Icon from "@expo/vector-icons/FontAwesome5";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
 import { utilities } from "../constants/Layout";
