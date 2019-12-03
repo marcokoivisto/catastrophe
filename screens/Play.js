@@ -34,15 +34,14 @@ export default class App extends Component {
     this.gameEngine = null;
     this.entities = level();
 
-    // backgroundSound.stopAsync();
-    // levelSound.playAsync();
+    backgroundSound.stopAsync();
+    levelSound.playAsync();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.level && nextProps.level !== this.props.level) {
       this.entities = nextProps.level(); // rebuild entities
       this.gameEngine.swap(this.entities); // load new entities
-      console.log("game reloaded", nextProps);
     }
   }
 
@@ -89,7 +88,7 @@ export default class App extends Component {
 
   render() {
     const { score, running, completed } = this.state;
-    const { lives, setLevel, buyLives } = this.props;
+    const { lives, onSetLevel, onBuyLives } = this.props;
     return (
       <>
         <View
@@ -135,7 +134,7 @@ export default class App extends Component {
               score={score}
               maxScore={10}
               lives={lives}
-              buyLives={buyLives}
+              onBuyLives={onBuyLives}
             />
           )}
           {!running && completed && (
@@ -143,7 +142,7 @@ export default class App extends Component {
               onReset={this.reset}
               score={score}
               maxScore={10}
-              onGoToNextLevel={() => setLevel(this.entities.NEXT_LEVEL_ID)}
+              onGoToNextLevel={() => onSetLevel(this.entities.NEXT_LEVEL_ID)}
             />
           )}
         </LinearGradient>

@@ -6,18 +6,25 @@ const tunaSound = new Audio.Sound();
 const obstacleSound = new Audio.Sound();
 const meowSound = new Audio.Sound();
 
+const toggleSounds = async isMuted => {
+  backgroundSound.setIsMutedAsync(isMuted);
+  levelSound.setIsMutedAsync(isMuted);
+  tunaSound.setIsMutedAsync(isMuted);
+  obstacleSound.setIsMutedAsync(isMuted);
+};
+
 const loadSounds = async () => {
   await loadSound(
     backgroundSound,
     require("../assets/sounds/background.mp3"),
     true
   );
-  await loadSound(levelSound, require("../assets/sounds/level.mp3"), true);
-  await loadSound(tunaSound, require("../assets/sounds/meow.mp3"), false);
+  await loadSound(levelSound, require("../assets/sounds/purr.wav"), true);
+  await loadSound(tunaSound, require("../assets/sounds/tuna1.wav"), false);
   await loadSound(meowSound, require("../assets/sounds/meow.mp3"), false);
   await loadSound(
     obstacleSound,
-    require("../assets/sounds/obstacle.mp3"),
+    require("../assets/sounds/hit-obstacle.wav"),
     false
   );
 
@@ -39,5 +46,6 @@ export {
   levelSound,
   tunaSound,
   obstacleSound,
-  meowSound
+  meowSound,
+  toggleSounds
 };

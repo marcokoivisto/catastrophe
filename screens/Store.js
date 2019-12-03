@@ -4,16 +4,15 @@ import { utilities } from "../constants/Layout";
 import { useHistory } from "react-router-native";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
-import MenuBackground from "../components/MenuBackground";
 import Lives from "../components/Lives";
 
 export default Store = props => {
-  const { buyLives, lives } = props;
+  const { onBuyLives, lives } = props;
   const { container, contentCenter, headline, textCenter } = utilities;
   const history = useHistory();
 
   return (
-    <MenuBackground>
+    <>
       <View
         style={{
           position: "absolute",
@@ -36,11 +35,11 @@ export default Store = props => {
             <Button
               flexGrow={false}
               title="buy lives"
-              onPress={() => buyLives()}
+              onPress={() => onBuyLives()}
               block
               backgroundColor="#ffbf00"
             />
-            <Spacing height={15} />
+            <Spacing height={60} />
             <Button
               flexGrow={false}
               title="go back"
@@ -51,6 +50,6 @@ export default Store = props => {
           </View>
         </SafeAreaView>
       </View>
-    </MenuBackground>
+    </>
   );
 };

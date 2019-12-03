@@ -34,7 +34,8 @@ const utilities = StyleSheet.create({
     fontWeight: "bold"
   },
   text: {
-    fontSize: 16
+    fontSize: 18,
+    fontWeight: "600"
   },
   textCenter: {
     textAlign: "center"
