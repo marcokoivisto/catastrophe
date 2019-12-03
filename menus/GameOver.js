@@ -40,9 +40,9 @@ const GameOver = props => {
         game over
       </Text>
       <View style={{ alignItems: "center" }}>
-        <Spacing height={20} />
+        <Spacing />
         <Score score={score} maxScore={maxScore} />
-        <Spacing height={20} />
+        <Spacing height={40} />
         {lives > 0 && (
           <Button flexGrow={false} title="play again" onPress={onReset} block />
         )}

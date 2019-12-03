@@ -47,9 +47,9 @@ const LevelCompleted = props => {
         you win!
       </Text>
       <View style={{ alignItems: "center" }}>
-        <Spacing height={20} />
+        <Spacing />
         <Score score={score} maxScore={maxScore} />
-        <Spacing height={20} />
+        <Spacing height={40} />
         <Button
           flexGrow={false}
           title="next level"
