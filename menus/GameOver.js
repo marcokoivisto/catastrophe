@@ -11,7 +11,7 @@ import Score from "../components/Score";
 
 const GameOver = props => {
   const { container, contentCenter } = utilities;
-  const { onReset, score, maxScore } = props;
+  const { onReset, score, maxScore, lives, buyLives } = props;
   const history = useHistory();
 
   const quit = () => {
@@ -43,7 +43,23 @@ const GameOver = props => {
           <Spacing height={20} />
           <Score score={score} maxScore={maxScore} />
           <Spacing height={20} />
-          <Button flexGrow={false} title="play again" onPress={onReset} block />
+          {lives > 0 && (
+            <Button
+              flexGrow={false}
+              title="play again"
+              onPress={onReset}
+              block
+            />
+          )}
+          {lives === 0 && (
+            <Button
+              flexGrow={false}
+              title="buy lives"
+              onPress={() => buyLives()}
+              backgroundColor="#ffbf00"
+              block
+            />
+          )}
           <Spacing height={15} />
           <Button
             flexGrow={false}

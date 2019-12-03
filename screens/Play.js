@@ -89,7 +89,7 @@ export default class App extends Component {
 
   render() {
     const { score, running, completed } = this.state;
-    const { lives, setLevel } = this.props;
+    const { lives, setLevel, buyLives } = this.props;
     return (
       <>
         <View
@@ -130,7 +130,13 @@ export default class App extends Component {
             <StatusBar hidden={true} />
           </GameEngine>
           {!running && !completed && (
-            <GameOver onReset={this.reset} score={score} maxScore={10} />
+            <GameOver
+              onReset={this.reset}
+              score={score}
+              maxScore={10}
+              lives={lives}
+              buyLives={buyLives}
+            />
           )}
           {!running && completed && (
             <LevelCompleted

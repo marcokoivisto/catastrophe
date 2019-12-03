@@ -5,18 +5,42 @@ import { useHistory } from "react-router-native";
 import Spacing from "../components/Spacing";
 import Button from "../components/Button";
 import MenuBackground from "../components/MenuBackground";
+import Lives from "../components/Lives";
 
-export default Store = () => {
+export default Store = props => {
+  const { buyLives, lives } = props;
   const { container, contentCenter, headline, textCenter } = utilities;
   const history = useHistory();
 
   return (
     <MenuBackground>
+      <View
+        style={{
+          position: "absolute",
+          top: -10,
+          zIndex: 1,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "100%",
+          paddingLeft: 45,
+          paddingRight: 45
+        }}
+      >
+        <Lives small lives={lives} />
+      </View>
       <View style={[container, contentCenter]}>
         <SafeAreaView>
           <View>
             <Text style={[headline, textCenter]}>Store</Text>
             <Spacing height={30} />
+            <Button
+              flexGrow={false}
+              title="buy lives"
+              onPress={() => buyLives()}
+              block
+              backgroundColor="#ffbf00"
+            />
+            <Spacing height={15} />
             <Button
               flexGrow={false}
               title="go back"

@@ -45,6 +45,14 @@ export default class App extends Component {
     });
   };
 
+  buyLives = () => {
+    let { lives } = this.state;
+    lives += 9;
+    this.setState({
+      lives
+    });
+  };
+
   render() {
     const { level, lives } = this.state;
     return (
@@ -54,7 +62,12 @@ export default class App extends Component {
           path="/levels"
           render={props => <LevelMap {...props} setLevel={this.setLevel} />}
         />
-        <Route path="/store" component={Store} />
+        <Route
+          path="/store"
+          render={props => (
+            <Store {...props} lives={lives} buyLives={this.buyLives} />
+          )}
+        />
         <Route path="/settings" component={Settings} />
         <Route
           path="/play"
@@ -62,6 +75,7 @@ export default class App extends Component {
             <Play
               {...props}
               lives={lives}
+              buyLives={this.buyLives}
               lostLife={this.lostLife}
               level={level}
               setLevel={this.setLevel}
