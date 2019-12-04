@@ -19,11 +19,14 @@ export default Level2 = () => {
     LEVEL_ID: 1,
     NEXT_LEVEL_ID: 2,
     physics: { engine, world },
-    obstacle1: Obstacle(world, { x: 0, y: 100 }, Math.PI, 150, "left"),
-    obstacle2: Obstacle(world, { x: 0, y: 400 }, Math.PI, 200, "right"),
-    obstacle3: Obstacle(world, { x: 0, y: 700 }, Math.PI, 250, "left"),
-    obstacle4: Obstacle(world, { x: 0, y: 1000 }, Math.PI, 300, "right"),
-    obstacle5: Obstacle(world, { x: 0, y: 1300 }, Math.PI, 150, "left"),
+    obstacle1: Obstacle(world, { x: 0, y: 200 }, Math.PI, 200, "right"),
+    obstacle2: Obstacle(world, { x: 0, y: 300 }, Math.PI, 300, "right"),
+    obstacle3: Obstacle(world, { x: 0, y: 400 }, Math.PI, 400, "right"),
+    obstacle4: Obstacle(world, { x: 0, y: 500 }, Math.PI, 500, "right"),
+    obstacle5: Obstacle(world, { x: 0, y: 800 }, Math.PI, 200, "left"),
+    obstacle6: Obstacle(world, { x: 0, y: 900 }, Math.PI, 300, "left"),
+    obstacle7: Obstacle(world, { x: 0, y: 1000 }, Math.PI, 400, "left"),
+    obstacle8: Obstacle(world, { x: 0, y: 1100 }, Math.PI, 500, "left"),
     leftWall: Wall(
       world,
       { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },
@@ -53,44 +56,49 @@ export default Level2 = () => {
     ),
     tuna1: Tuna(world, {
       x: 100,
-      y: 100
+      y: 150
     }),
+
     tuna2: Tuna(world, {
-      x: 120,
-      y: 200
+      x: 80,
+      y: 250
     }),
+
     tuna3: Tuna(world, {
-      x: 130,
-      y: 300
+      x: 70,
+      y: 350
     }),
+
     tuna4: Tuna(world, {
-      x: 150,
-      y: 400
+      x: 70,
+      y: 450
     }),
+
     tuna5: Tuna(world, {
-      x: 180,
-      y: 700
+      x: 90,
+      y: 550
     }),
     tuna6: Tuna(world, {
-      x: 200,
-      y: 800
+      x: 110,
+      y: 650
     }),
     tuna7: Tuna(world, {
-      x: 200,
-      y: 1000
+      x: 160,
+      y: 750
     }),
     tuna8: Tuna(world, {
-      x: 200,
-      y: 1000
+      x: 210,
+      y: 850
     }),
     tuna9: Tuna(world, {
-      x: 200,
-      y: 1000
+      x: 260,
+      y: 950
     }),
     tuna10: Tuna(world, {
-      x: 200,
-      y: 1000
+      x: 290,
+      y: 1050
     }),
+
     camera: { offsetY: 0 }
   };
 };
