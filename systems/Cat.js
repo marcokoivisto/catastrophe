@@ -7,7 +7,7 @@ import {
   startLanding
 } from "../utils/catActionTimers";
 
-const MAX_VERTICAL_VELOCITY = 20;
+const MAX_VERTICAL_VELOCITY = 15;
 const MAX_LATERAL_VELOCITY = 10;
 
 let lastPress = null;
