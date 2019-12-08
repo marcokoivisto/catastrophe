@@ -90,7 +90,7 @@ export default LevelMap = props => {
       />
       {!hasLives() && (
         <Button
-          title="buy lives"
+          title="buy 9 lives"
           onPress={() => onBuyLives()}
           backgroundColor="#ffbf00"
           style={{ position: "absolute", bottom: 150 }}

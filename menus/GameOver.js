@@ -49,7 +49,7 @@ const GameOver = props => {
         {lives === 0 && (
           <Button
             flexGrow={false}
-            title="buy lives"
+            title="buy 9 lives"
             onPress={() => onBuyLives()}
             backgroundColor="#ffbf00"
             block

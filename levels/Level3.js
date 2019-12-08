@@ -68,43 +68,43 @@ export default Level3 = () => {
     ),
     tuna1: Tuna(world, {
       x: 140,
-      y: 230
+      y: 200
     }),
     tuna2: Tuna(world, {
       x: 150,
-      y: 400
+      y: 350
     }),
     tuna3: Tuna(world, {
       x: 250,
-      y: 600
+      y: 500
     }),
     tuna4: Tuna(world, {
       x: 250,
-      y: 750
+      y: 650
     }),
     tuna5: Tuna(world, {
       x: 150,
-      y: 950
+      y: 800
     }),
     tuna6: Tuna(world, {
       x: 150,
-      y: 1100
+      y: 950
     }),
     tuna7: Tuna(world, {
       x: 100,
-      y: 1200
+      y: 1100
     }),
     tuna8: Tuna(world, {
       x: 190,
-      y: 1450
+      y: 1250
     }),
     tuna9: Tuna(world, {
       x: 140,
-      y: 1650
+      y: 1400
     }),
     tuna10: Tuna(world, {
       x: 150,
-      y: 1800
+      y: 1550
     }),
     tuna11: Tuna(world, {
       x: 280,
@@ -120,43 +120,43 @@ export default Level3 = () => {
     }),
     tuna14: Tuna(world, {
       x: 150,
-      y: 2500
+      y: 2450
     }),
     tuna15: Tuna(world, {
       x: 100,
-      y: 2700
+      y: 2600
     }),
     tuna16: Tuna(world, {
       x: 120,
-      y: 2950
+      y: 2750
     }),
     tuna17: Tuna(world, {
       x: 280,
-      y: 3200
+      y: 2900
     }),
     tuna18: Tuna(world, {
       x: 190,
-      y: 3500
+      y: 3050
     }),
     tuna19: Tuna(world, {
       x: 200,
-      y: 3700
+      y: 3200
     }),
     tuna20: Tuna(world, {
       x: 280,
-      y: 3900
+      y: 3350
     }),
     tuna21: Tuna(world, {
       x: 200,
-      y: 4100
+      y: 3500
     }),
     tuna22: Tuna(world, {
       x: 280,
-      y: 4300
+      y: 3650
     }),
     tuna22: Tuna(world, {
       x: 250,
-      y: 4500
+      y: 3800
     }),
     camera: { offsetY: 0 }
   };

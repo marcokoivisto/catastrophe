@@ -52,15 +52,15 @@ export default Level1 = () => {
     }),
     tuna2: Tuna(world, {
       x: 120,
-      y: 200
+      y: 250
     }),
     tuna3: Tuna(world, {
       x: 130,
-      y: 300
+      y: 400
     }),
     tuna4: Tuna(world, {
       x: 150,
-      y: 400
+      y: 550
     }),
     tuna5: Tuna(world, {
       x: 180,
@@ -68,7 +68,7 @@ export default Level1 = () => {
     }),
     tuna6: Tuna(world, {
       x: 200,
-      y: 800
+      y: 850
     }),
     tuna7: Tuna(world, {
       x: 200,
@@ -76,15 +76,15 @@ export default Level1 = () => {
     }),
     tuna8: Tuna(world, {
       x: 200,
-      y: 1000
+      y: 1150
     }),
     tuna9: Tuna(world, {
       x: 200,
-      y: 1000
+      y: 1300
     }),
     tuna10: Tuna(world, {
       x: 200,
-      y: 1000
+      y: 1450
     }),
     camera: { offsetY: 0 }
   };
