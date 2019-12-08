@@ -77,6 +77,9 @@ export default class App extends Component {
   };
 
   reset = (forceSwap = false) => {
+    gameOver.stopAsync();
+    gameWin.stopAsync();
+
     if (forceSwap) {
       const { level } = this.props;
 
