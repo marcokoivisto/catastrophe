@@ -44,7 +44,7 @@ export default LevelMap = props => {
           paddingRight: 20
         }}
       >
-        <Lives small lives={lives} />
+        <Lives notTransparent small lives={lives} />
       </View>
       {DEBUG && (
         <LevelButton

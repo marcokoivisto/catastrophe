@@ -4,17 +4,18 @@ import PropTypes from "prop-types";
 import { utilities } from "../constants/Layout";
 
 const Lives = props => {
-  const { lives, small, noBackground } = props;
+  const { lives, small, noBackground, notTransparent } = props;
   const { headline, headline3 } = utilities;
+  const backgroundColor = `rgba(255, 254, 247, ${
+    notTransparent ? "1" : "0.7"
+  })`;
 
   return (
     <View
       style={{
         alignItems: "center",
         flexDirection: "row",
-        backgroundColor: noBackground
-          ? "transparent"
-          : "rgba(255, 254, 247, 0.7)",
+        backgroundColor: noBackground ? "transparent" : backgroundColor,
         maxHeight: 50,
         paddingHorizontal: 15,
         borderRadius: 25
