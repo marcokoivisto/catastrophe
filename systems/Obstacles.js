@@ -70,7 +70,6 @@ export const jump = cat => {
   );
 
   obstacleSound.replayAsync(); // this should be another sound
-  Vibration.vibrate(500);
 };
 
 const hurt = (cat, dispatch) => {
