@@ -10,10 +10,12 @@ import Lives from "../components/Lives";
 export default LevelMap = props => {
   const DEBUG = true;
   const { container, contentCenter } = utilities;
-  const { onBuyLives, onSetLevel, lives } = props;
+  const { onBuyLives, onSetLevel, lives, enabledLevels } = props;
   const history = useHistory();
 
   const hasLives = () => lives > 0;
+
+  const isDisabled = id => !(hasLives() && enabledLevels.includes(id));
 
   const handleSelectLevel = levelId => {
     onSetLevel(levelId);
@@ -53,25 +55,25 @@ export default LevelMap = props => {
       )}
       <LevelButton
         title="1"
-        disabled={!hasLives()}
+        disabled={isDisabled(0)}
         onPress={() => handleSelectLevel(0)}
         style={{ position: "absolute", top: "15%", right: "24%" }}
       />
       <LevelButton
         title="2"
-        disabled={!hasLives()}
+        disabled={isDisabled(1)}
         onPress={() => handleSelectLevel(1)}
         style={{ position: "absolute", top: "35%", right: "3%" }}
       />
       <LevelButton
         title="50"
-        disabled={!hasLives()}
+        disabled={isDisabled(2)}
         onPress={() => handleSelectLevel(2)}
         style={{ position: "absolute", top: "50%", left: "30%" }}
       />
       <LevelButton
         title="100"
-        disabled={!hasLives()}
+        disabled={isDisabled(3)}
         onPress={() => handleSelectLevel(3)}
         style={{ position: "absolute", top: "72%", left: "20%" }}
       />

@@ -48,6 +48,7 @@ export default class App extends Component {
   handleEvent = e => {
     switch (e.type) {
       case "landed-successfully":
+        this.props.onLevelCompleted(this.entities.NEXT_LEVEL_ID);
         this.setState({
           running: false,
           completed: true
