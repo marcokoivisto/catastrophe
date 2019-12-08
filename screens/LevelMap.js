@@ -1,15 +1,19 @@
 import React from "react";
-import { ImageBackground, SafeAreaView } from "react-native";
+import { ImageBackground, View } from "react-native";
 import { utilities } from "../constants/Layout";
 import Button from "../components/Button";
 import LevelButton from "../components/LevelButton";
 import { useHistory } from "react-router-native";
 
+import Lives from "../components/Lives";
+
 export default LevelMap = props => {
   const DEBUG = true;
   const { container, contentCenter } = utilities;
-  const { onSetLevel } = props;
+  const { onBuyLives, onSetLevel, lives } = props;
   const history = useHistory();
+
+  const hasLives = () => lives > 0;
 
   const handleSelectLevel = levelId => {
     onSetLevel(levelId);
@@ -26,6 +30,20 @@ export default LevelMap = props => {
       imageStyle={{ resizeMode: "cover" }}
       source={require("../assets/levels/map.png")}
     >
+      <View
+        style={{
+          position: "absolute",
+          top: 50,
+          zIndex: 1,
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          width: "100%",
+          paddingLeft: 20,
+          paddingRight: 20
+        }}
+      >
+        <Lives small lives={lives} />
+      </View>
       {DEBUG && (
         <LevelButton
           title="D"
@@ -35,24 +53,36 @@ export default LevelMap = props => {
       )}
       <LevelButton
         title="1"
+        disabled={!hasLives()}
         onPress={() => handleSelectLevel(0)}
         style={{ position: "absolute", top: "15%", right: "24%" }}
       />
       <LevelButton
         title="2"
+        disabled={!hasLives()}
         onPress={() => handleSelectLevel(1)}
         style={{ position: "absolute", top: "35%", right: "3%" }}
       />
       <LevelButton
         title="50"
+        disabled={!hasLives()}
         onPress={() => handleSelectLevel(2)}
         style={{ position: "absolute", top: "50%", left: "30%" }}
       />
       <LevelButton
         title="100"
+        disabled={!hasLives()}
         onPress={() => handleSelectLevel(3)}
         style={{ position: "absolute", top: "72%", left: "20%" }}
       />
+      {!hasLives() && (
+        <Button
+          title="buy lives"
+          onPress={() => onBuyLives()}
+          backgroundColor="#ffbf00"
+          style={{ position: "absolute", bottom: 150 }}
+        />
+      )}
       <Button
         title="go back"
         backgroundColor="#d4d5cf"

@@ -35,6 +35,7 @@ const LevelButton = props => {
 
   return (
     <TouchableOpacity
+      disabled={disabled}
       activeOpacity={0.7}
       style={[
         buttonStyles,

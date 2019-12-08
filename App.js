@@ -69,7 +69,14 @@ export default class App extends Component {
           <Route exact path="/" component={MainMenu} />
           <Route
             path="/levels"
-            render={props => <LevelMap {...props} onSetLevel={this.setLevel} />}
+            render={props => (
+              <LevelMap
+                {...props}
+                onSetLevel={this.setLevel}
+                lives={lives}
+                onBuyLives={this.buyLives}
+              />
+            )}
           />
           <Route
             path="/store"
