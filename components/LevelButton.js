@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
 const LevelButton = props => {
   const {
@@ -15,14 +16,15 @@ const LevelButton = props => {
   const styles = StyleSheet.create({
     button: {
       height: 75,
-      width: 90,
+      minWidth: 90,
       alignItems: "center",
       justifyContent: "center",
       flexDirection: "row",
       backgroundColor: "#fff",
       borderRadius: 50,
       borderWidth: 12,
-      borderColor: "#e29dad"
+      borderColor: "#e29dad",
+      paddingHorizontal: 10
     },
     buttonText: {
       fontSize: 28,
@@ -54,7 +56,20 @@ const LevelButton = props => {
       ]}
       onPress={disabled ? null : onPress}
     >
-      <Text style={buttonTextStyles}>{title}</Text>
+      <Text style={buttonTextStyles}>
+        {!!completed && (
+          <>
+            <Icon
+              iconStyle={{ marginRight: 15 }}
+              fontWeight="bold"
+              size={22}
+              name="award"
+              color="#ffd700"
+            />{" "}
+          </>
+        )}
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
