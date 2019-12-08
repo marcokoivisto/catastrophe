@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { StyleSheet, StatusBar, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { GameEngine } from "react-native-game-engine";
-import Icon from "@expo/vector-icons/FontAwesome5";
 
 // Utils
 import CameraRenderer from "../CameraRenderer";
-import { levelSound, backgroundSound } from "../utils/sound";
+import { levelSound, backgroundSound, gameOver, gameWin } from "../utils/sound";
 
 // Systems
 import Systems from "../systems";
@@ -56,6 +55,7 @@ export default class App extends Component {
           running: false,
           completed: true
         });
+        gameWin.replayAsync();
         break;
       case "game-over":
         this.setState({
@@ -63,6 +63,7 @@ export default class App extends Component {
           completed: false
         });
         this.props.lostLife();
+        gameOver.replayAsync();
         break;
       case "tuna-collected": {
         let { score } = this.state;

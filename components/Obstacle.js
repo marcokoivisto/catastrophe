@@ -23,8 +23,7 @@ export class ObstacleRenderer extends PureComponent {
           height: height,
           overflow: "hidden",
           flexDirection: "row",
-          transform: [{ rotateZ: angle + "rad" }],
-          backgroundColor: "#fff"
+          transform: [{ rotateZ: angle + "rad" }]
         }}
       />
     );
