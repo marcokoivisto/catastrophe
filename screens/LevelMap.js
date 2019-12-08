@@ -10,12 +10,19 @@ import Lives from "../components/Lives";
 export default LevelMap = props => {
   const DEBUG = true;
   const { container, contentCenter } = utilities;
-  const { onBuyLives, onSetLevel, lives, enabledLevels } = props;
+  const {
+    onBuyLives,
+    onSetLevel,
+    lives,
+    enabledLevels,
+    completedLevels
+  } = props;
   const history = useHistory();
 
   const hasLives = () => lives > 0;
-
-  const isDisabled = id => !(hasLives() && enabledLevels.includes(id));
+  const isCompleted = id => completedLevels.includes(id);
+  const isEnabled = id => enabledLevels.includes(id);
+  const isDisabled = id => !(hasLives() && isEnabled(id));
 
   const handleSelectLevel = levelId => {
     onSetLevel(levelId);
@@ -56,24 +63,28 @@ export default LevelMap = props => {
       <LevelButton
         title="1"
         disabled={isDisabled(0)}
+        completed={isCompleted(0)}
         onPress={() => handleSelectLevel(0)}
         style={{ position: "absolute", top: "15%", right: "24%" }}
       />
       <LevelButton
         title="2"
         disabled={isDisabled(1)}
+        completed={isCompleted(1)}
         onPress={() => handleSelectLevel(1)}
         style={{ position: "absolute", top: "35%", right: "3%" }}
       />
       <LevelButton
         title="50"
         disabled={isDisabled(2)}
+        completed={isCompleted(2)}
         onPress={() => handleSelectLevel(2)}
         style={{ position: "absolute", top: "50%", left: "30%" }}
       />
       <LevelButton
         title="100"
         disabled={isDisabled(3)}
+        completed={isCompleted(3)}
         onPress={() => handleSelectLevel(3)}
         style={{ position: "absolute", top: "72%", left: "20%" }}
       />

@@ -2,7 +2,15 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 const LevelButton = props => {
-  const { title, onPress, color, style, disabled, fontWeight } = props;
+  const {
+    title,
+    onPress,
+    color,
+    style,
+    disabled,
+    fontWeight,
+    completed
+  } = props;
 
   const styles = StyleSheet.create({
     button: {
@@ -40,7 +48,9 @@ const LevelButton = props => {
       style={[
         buttonStyles,
         style,
-        { opacity: disabled ? 0.5 : 1, alignItems: "center" }
+        { opacity: disabled ? 0.5 : 1, alignItems: "center" },
+        { backgroundColor: completed ? "#fafad2" : "#fff" },
+        { borderColor: completed ? "#ffd700" : "#e29dad" }
       ]}
       onPress={disabled ? null : onPress}
     >
