@@ -108,7 +108,9 @@ export default class App extends Component {
           }}
         >
           <Lives small lives={lives} />
-          {running && <Score small score={score} maxScore={10} />}
+          {running && (
+            <Score small score={score} maxScore={this.entities.MAX_SCORE} />
+          )}
         </View>
         <LinearGradient
           style={styles.container}
@@ -136,7 +138,7 @@ export default class App extends Component {
             <GameOver
               onReset={this.reset}
               score={score}
-              maxScore={10}
+              maxScore={this.entities.MAX_SCORE}
               lives={lives}
               onBuyLives={onBuyLives}
             />
@@ -145,7 +147,7 @@ export default class App extends Component {
             <LevelCompleted
               onReset={this.reset}
               score={score}
-              maxScore={10}
+              maxScore={this.entities.MAX_SCORE}
               onGoToNextLevel={() => onSetLevel(this.entities.NEXT_LEVEL_ID)}
             />
           )}

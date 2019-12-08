@@ -18,6 +18,7 @@ export default Level1 = () => {
   return {
     LEVEL_ID: 0,
     NEXT_LEVEL_ID: 1,
+    MAX_SCORE: 10,
     physics: { engine, world },
     leftWall: Wall(
       world,

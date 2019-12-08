@@ -18,6 +18,7 @@ export default Level3 = () => {
   return {
     LEVEL_ID: 2,
     NEXT_LEVEL_ID: 3,
+    MAX_SCORE: 20,
     physics: { engine, world },
     obstacle1: Obstacle(world, { x: 0, y: 250 }, Math.PI, 150, "left"),
     obstacle2: Obstacle(world, { x: 0, y: 400 }, Math.PI, 250, "right"),
@@ -145,18 +146,6 @@ export default Level3 = () => {
     tuna20: Tuna(world, {
       x: 280,
       y: 3350
-    }),
-    tuna21: Tuna(world, {
-      x: 200,
-      y: 3500
-    }),
-    tuna22: Tuna(world, {
-      x: 280,
-      y: 3650
-    }),
-    tuna22: Tuna(world, {
-      x: 250,
-      y: 3800
     }),
     camera: { offsetY: 0 }
   };
