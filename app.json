@@ -2,13 +2,10 @@
   "expo": {
     "name": "Catastrophe",
     "slug": "Catastrophe",
+    "description": "Someone left the balcony door open and Morty the Housecat wandered out! Being too excited, he slipped and is now falling from the balcony. It is now your job to safely guide him back down to the ground, avoiding obstacles and eating treats along the way!",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,15 +17,11 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": [
-          "audio"
-        ]
+        "UIBackgroundModes": ["audio"]
       }
     }
   }
