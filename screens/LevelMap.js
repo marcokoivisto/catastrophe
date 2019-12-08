@@ -44,12 +44,12 @@ export default LevelMap = props => {
         style={{ position: "absolute", top: "35%", right: "3%" }}
       />
       <LevelButton
-        title="3"
+        title="50"
         onPress={() => handleSelectLevel(2)}
         style={{ position: "absolute", top: "50%", left: "30%" }}
       />
       <LevelButton
-        title="4"
+        title="100"
         onPress={() => handleSelectLevel(3)}
         style={{ position: "absolute", top: "72%", left: "20%" }}
       />

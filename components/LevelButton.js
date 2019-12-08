@@ -17,7 +17,7 @@ const LevelButton = props => {
       borderColor: "#e29dad"
     },
     buttonText: {
-      fontSize: 32,
+      fontSize: 28,
       fontWeight: fontWeight ? fontWeight : "bold",
       color
     }
