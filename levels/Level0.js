@@ -16,13 +16,26 @@ export default Level0 = () => {
     LEVEL_ID: 999,
     NEXT_LEVEL_ID: 999,
     physics: { engine, world },
+    leftWall: Wall(
+      world,
+      { x: Constants.WALL_WIDTH / 2, y: Constants.SCREEN_HEIGHT / 2 },
+      { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 9 }
+    ),
+    rightWall: Wall(
+      world,
+      {
+        x: Constants.SCREEN_WIDTH - Constants.WALL_WIDTH / 2,
+        y: Constants.SCREEN_HEIGHT / 2
+      },
+      { width: Constants.WALL_WIDTH, height: Constants.SCREEN_HEIGHT * 9 }
+    ),
     floor: Floor(
       world,
       {
         x: Constants.SCREEN_WIDTH / 2,
-        y: Constants.SCREEN_HEIGHT * 4 - Constants.WALL_WIDTH / 2
+        y: Constants.SCREEN_HEIGHT * 5 - Constants.WALL_WIDTH / 2
       },
-      { width: Constants.SCREEN_WIDTH, height: Constants.WALL_WIDTH * 4 }
+      { width: Constants.SCREEN_WIDTH, height: Constants.WALL_WIDTH * 5 }
     ),
     cat: Cat(
       world,
