@@ -34,7 +34,7 @@ export default Store = props => {
             <Spacing height={30} />
             <Button
               flexGrow={false}
-              title="buy lives"
+              title="buy 9 lives"
               onPress={() => onBuyLives()}
               block
               backgroundColor="#ffbf00"
