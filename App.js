@@ -21,7 +21,9 @@ export default class App extends Component {
 
     this.state = {
       lives: 9,
-      level: Levels[0]
+      level: Levels[0],
+      // enabledLevels: [0, 1, 2, 3] uncomment this and comment L26 if you wanna enable all levels for debugging
+      enabledLevels: [0]
     };
 
     this.init();
@@ -57,8 +59,19 @@ export default class App extends Component {
     });
   };
 
+  levelCompleted = id => {
+    let { enabledLevels } = this.state;
+
+    if (!enabledLevels.includes(id)) {
+      enabledLevels.push(id);
+      this.setState({
+        enabledLevels
+      });
+    }
+  };
+
   render() {
-    const { level, lives } = this.state;
+    const { level, lives, enabledLevels } = this.state;
     return (
       <NativeRouter>
         <ImageBackground
@@ -69,7 +82,15 @@ export default class App extends Component {
           <Route exact path="/" component={MainMenu} />
           <Route
             path="/levels"
-            render={props => <LevelMap {...props} onSetLevel={this.setLevel} />}
+            render={props => (
+              <LevelMap
+                {...props}
+                enabledLevels={enabledLevels}
+                onSetLevel={this.setLevel}
+                lives={lives}
+                onBuyLives={this.buyLives}
+              />
+            )}
           />
           <Route
             path="/store"
@@ -88,6 +109,7 @@ export default class App extends Component {
                 lostLife={this.lostLife}
                 level={level}
                 onSetLevel={this.setLevel}
+                onLevelCompleted={this.levelCompleted}
               />
             )}
           />
