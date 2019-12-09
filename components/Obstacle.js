@@ -14,7 +14,7 @@ export class ObstacleRenderer extends PureComponent {
     return (
       <Image
         resizeMode="repeat"
-        source={require("../assets/brick.png")}
+        source={require("../assets/obstacle.png")}
         style={{
           position: "absolute",
           left: x,
