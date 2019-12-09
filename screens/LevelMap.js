@@ -8,7 +8,7 @@ import { useHistory } from "react-router-native";
 import Lives from "../components/Lives";
 
 export default LevelMap = props => {
-  const DEBUG = true;
+  const DEBUG = false;
   const { container, contentCenter } = utilities;
   const {
     onBuyLives,
@@ -45,7 +45,7 @@ export default LevelMap = props => {
           top: 50,
           zIndex: 1,
           flexDirection: "row",
-          justifyContent: "flex-end",
+          justifyContent: "flex-start",
           width: "100%",
           paddingLeft: 20,
           paddingRight: 20
