@@ -55,7 +55,6 @@ export default class App extends Component {
           running: false,
           completed: true
         });
-        gameWin.replayAsync();
         break;
       case "game-over":
         this.setState({
