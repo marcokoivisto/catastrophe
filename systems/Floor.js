@@ -1,7 +1,7 @@
 import Matter from "matter-js";
 import Constants from "../constants/Constants";
 import { Vibration } from "react-native";
-import { obstacleSound, gameWin } from "../utils/sound";
+import { obstacleSound, gameWin, gameOver } from "../utils/sound";
 
 import { startHurting, startFinalLanding } from "../utils/catActionTimers";
 
@@ -60,7 +60,10 @@ const completeLevel = (cat, dispatch) => {
 const hurtCat = (cat, dispatch) => {
   cat.body.collisionFilter.mask = Constants.COLLISIONS.dead;
 
-  startHurting(() => (cat.action = "hurting")).then(() => {
+  startHurting(() => {
+    cat.action = "hurting";
+    gameOver.replayAsync();
+  }).then(() => {
     dispatch({ type: "game-over" });
   });
 

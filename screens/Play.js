@@ -62,7 +62,6 @@ export default class App extends Component {
           completed: false
         });
         this.props.lostLife();
-        gameOver.replayAsync();
         break;
       case "tuna-collected": {
         let { score } = this.state;
